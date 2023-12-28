@@ -1,9 +1,9 @@
-<h1 align="center">™°‌  𝐖ᴇʙɴᴇᴛ_x_𝐌ᴀɴᴀɢᴇᴍᴇɴᴛ ♡</h1>
+<h1 align="center">™°‌ 𝐒𝐀𝐕𝐕𝐘 𝐑𝐎𝐁𝐎𝐓  ♡</h1>
 <p align="center">
   <img src="http://telegra.ph/file/74b30d5ca9e482daf5466.jpg">
 </p>
 <p align="center">
-<a href="https://github.com/Ranavanshi/PrachiRobot/stargazers"><img src="https://img.shields.io/github/stars/Ranavanshi/PrachiRobot?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
+<a href="https://github.com/Noob-savvy/SavvyRobot/stargazers"><img src="https://img.shields.io/github/stars/Ranavanshi/PrachiRobot?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
 <a href="https://github.com/Ranavanshi/PrachiRobot/network/members"> <img src="https://img.shields.io/github/forks/Ranavanshi/PrachiRobot?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
 <a href="https://github.com/Ranavanshi/PrachiRobot/blob/master/LICENSE"> <img src="https://img.shields.io/badge/License-MIT-blueviolet?style=for-the-badge" alt="License" /> </a>
 <a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Written%20in-Python-skyblue?style=for-the-badge&logo=python" alt="Python" /> </a>
@@ -33,7 +33,7 @@
 
 <h2>  ᴅᴇᴘʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ​ 🚀</h2> 
 ᴛʜᴇ ᴇᴀsɪᴇsᴛ ᴡᴀʏ ᴛᴏ ᴅᴇᴘʟᴏʏ  ɢʀᴏᴜᴘ ᴄᴏɴᴛʀᴏʟʟᴇʀ 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/Ranavanshi/PrachiRobot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/Noob-savvy/SavvyRobo)"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
  ━━━━━━━━━━━━━━━━━━━━━━
 <h3> ʜᴏᴡ ᴛᴏ ᴍᴀᴋᴇ ʏᴏᴜʀ ᴏᴡɴ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ? </h3>
 <h2> <a href="https://youtu.be/YT_nYVb0OxI"><img alt="YouTube Video Views" src="https://img.shields.io/youtube/views/YT_nYVb0OxI",width="500" height="70">
