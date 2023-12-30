@@ -24,7 +24,6 @@ class Config(object):
     )
     TIME_API_KEY = ""
     # Get your API key from https://timezonedb.com/api
-API_PORT': 8080
 
 TEMP_MAIL_KEY: ""
 ARQ_API: ""
