@@ -1,4 +1,4 @@
-</from typing import Callable
+from typing import Callable
 
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import Message
