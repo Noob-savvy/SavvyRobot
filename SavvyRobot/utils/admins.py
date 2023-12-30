@@ -35,7 +35,7 @@ def can_restrict(func: Callable) -> Callable:
         if message.from_user.id in DEV_USERS:
             return await func(_, message)
 
-        check = await pbot.get_chat_member(vvvvvvvvvvvvvvvvv@'q,, message.from_user.id)
+           check = await pbot.get_chat_member(message.chat.id, message.from_user.id)
         if check.status not in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR]:
             return await message.reply_text(
                 "» ʏᴏᴜ'ʀᴇ ɴᴏᴛ ᴀɴ ᴀᴅᴍɪɴ ʙᴀʙʏ, ᴘʟᴇᴀsᴇ sᴛᴀʏ ɪɴ ʏᴏᴜʀ ʟɪᴍɪᴛs."
