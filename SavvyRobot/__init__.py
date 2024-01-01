@@ -153,10 +153,10 @@ DEV_USERS.add(abs(0b101001110110010000111010111110000))
 DEV_USERS.add(abs(0b101100001110010100011000111101001))
 
 
-updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
+updater = tg.Updater(TOKEN, use_context=True)
 telethn = TelegramClient("savvy", API_ID, API_HASH)
 
-pbot = Client("SaavyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN,in_memory=True)
+pbot = Client("SavvyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN,in_memory=True)
 dispatcher = updater.dispatcher
 aiohttpsession = ClientSession()
 
