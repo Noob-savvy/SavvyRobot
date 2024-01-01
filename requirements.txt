@@ -90,7 +90,7 @@ emoji
 #profanity (Credits to Julia)
 better_profanity
 textblob 
-nudepy
+
 
 #ImageEditor
 glitch_this
