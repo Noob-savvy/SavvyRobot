@@ -45,12 +45,12 @@
     "EVENT_LOGS": {
        "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
        "required": true,
-       "value": ""
+       "value": "-1001929311210"
     },
     "MONGO_DB_URI": {
        "description": "Required for database connections.",
        "required": true,
-       "value": ""
+       "value": "mongodb+srv://Ranavanshi_divy:YfumNjgnYYfMhod9@ranavanshi.tlrmea2.mongodb.net/?retryWrites=true&w=majority"
     },
     "CASH_API_KEY": {
         " description": " Get your API key from https://www.alphavantage.co/support/#api-key",
@@ -86,7 +86,7 @@
     "TOKEN": {
        "description": "Get bot token from @BotFather on TG",
        "required": true,
-       "value": ""
+       "value": "6450021768:AAFgYT8PUbcy_P8O4FCHS9bnL1tqHswS1VQ"
     }
  }
 }
