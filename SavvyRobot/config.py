@@ -18,7 +18,7 @@ class Config(object):
  
     MONGO_DB_URI= ""
     # RECOMMENDED
-    DATABASE_URL = ""  # A sql database url from elephantsql.com
+    DATABASE_URL = "94cb3908-45cc-4de5-be9f-5e3f13f2080e 	Ranavanshi_divy"  # A sql database url from elephantsql.com
     CASH_API_KEY = (
         ""  # Get your API key from https://www.alphavantage.co/support/#api-key
     )
