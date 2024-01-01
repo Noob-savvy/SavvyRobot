@@ -7,7 +7,7 @@ class Config(object):
     API_ID = "" # integer value, dont use ""
     API_HASH = ""
     TOKEN = ""  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
-    OWNER_ID = 1995154708 # If you dont know, run the bot and do /id in your private chat with it, also an integer
+    OWNER_ID = 6688753848 # If you dont know, run the bot and do /id in your private chat with it, also an integer
     
     SUPPORT_CHAT = "webnet_support_chats"  # Your own group for support, do not add the @
     START_IMG = ""
