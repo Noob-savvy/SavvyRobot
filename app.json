@@ -8,7 +8,7 @@
        "group",
        "manager"
     ],   
- "repository": "https://github.com/Ranavanshi/PrachiRobot",
+ "repository": "https://github.com/Noob-savvy/SavvyRobot",
  "stack": "heroku-22",
  "addons": [
     {
@@ -22,12 +22,12 @@
     "API_ID": {
        "description": "Get this value from my.telegram.org/apps.",
        "required": true,
-       "value": "14099001"
+       "value": "26106094"
     },
     "API_HASH": {
        "description": "Get this value from my.telegram.org/apps.",
        "required": true,
-       "value": "d4adbe1673633d1df424ae40b530d02a"
+       "value": "c0e69fb21461b8c51b985ca474850365"
     },
     "ALLOW_EXCL": {
        "description": "Set this to True if you want ! to be a command prefix along with /. Recommended is True",
@@ -71,7 +71,7 @@
     "OWNER_ID": {
        "description": "Your user ID as an integer.",
        "required": true,
-       "value": "1995154708"
+       "value": "6688753848"
     },
     "START_IMG": {
        "description": "Telegraph link of the image which will be shown at start command.",
