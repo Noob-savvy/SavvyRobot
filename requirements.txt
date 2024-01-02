@@ -102,7 +102,7 @@ Pillow
 pydub
 
 #Lel
-cloudmersive_virus_api_client==3.0.1
+cloudmersive_virus_api_client==3.2.0
 chromedriver==2.24.1
 coloredlogs
 loguru
