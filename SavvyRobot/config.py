@@ -11,10 +11,12 @@ class Config(object):
     
     SUPPORT_CHAT = "noob_savvy_chats"  # Your own group for support, do not add the @
     START_IMG = ""
-    EVENT_LOGS = ()  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
+    EVENT_LOGS = (
+     
+    )  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
     MONGO_DB_URI= ""
     # RECOMMENDED
-    DATABASE_URL = ""  # A sql database url from elephantsql.com
+    DATABASE_URL = "postgres://koyeb-adm:cwXPbm5U1unt@ep-rapid-glade-21109320.eu-central-1.aws.neon.tech/koyebdb"  # A sql database url from elephantsql.com
     CASH_API_KEY = (
         ""  # Get your API key from https://www.alphavantage.co/support/#api-key
     )
