@@ -50,7 +50,7 @@
     "MONGO_DB_URI": {
        "description": "Required for database connections.",
        "required": true,
-       "value": "mongodb+srv://Ranavanshi_divy:YfumNjgnYYfMhod9@ranavanshi.tlrmea2.mongodb.net/?retryWrites=true&w=majority"
+       "value": "mongodb+srv://ashwani:ASHWANI@ashwani.iwidhpg.mongodb.net/?retryWrites=true&w=majority"
     },
     "CASH_API_KEY": {
         " description": " Get your API key from https://www.alphavantage.co/support/#api-key",
@@ -86,7 +86,7 @@
     "TOKEN": {
        "description": "Get bot token from @BotFather on TG",
        "required": true,
-       "value": "6450021768:AAFgYT8PUbcy_P8O4FCHS9bnL1tqHswS1VQ"
+       "value": "6737705391:AAGefHje9q0ybZKVWA83b8oxCGiTXLnJ8LM"
     }
  }
 }
