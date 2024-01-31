@@ -6,7 +6,7 @@ from pyrate_limiter import (
     RequestRate,
 )
 from telegram import Update
-from telegram.ext import CommandHandler, Filters, MessageHandler, RegexHandler
+from telegram.ext import CommandHandler, filters, MessageHandler, RegexHandler
 
 import SavvyRobot.modules.sql.blacklistusers_sql as sql
 from SavvyRobot import ALLOW_EXCL, DEMONS, DEV_USERS, DRAGONS, TIGERS, WOLVES
