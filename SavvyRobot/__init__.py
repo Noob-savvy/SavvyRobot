@@ -19,6 +19,8 @@ from telethon.sessions import MemorySession
 # <=======================================================================================================>
 StartTime = time.time()
 
+loop = asyncio.get_event_loop()
+
 # enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
