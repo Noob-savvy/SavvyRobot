@@ -16,7 +16,7 @@ class Config(object):
     )  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
     MONGO_DB_URI= ""
     # RECOMMENDED
-    DATABASE_URL = "postgres://koyeb-adm:cwXPbm5U1unt@ep-rapid-glade-21109320.eu-central-1.aws.neon.tech/koyebdb"  # A sql database url from elephantsql.com
+    DATABASE_URL = "postgres://jsdowltx:q4u3NNMGm2x82LCyG3JsuVf3AaYHbt0h@kesavan.db.elephantsql.com/jsdowltx"  # A sql database url from elephantsql.com
     CASH_API_KEY = (
         ""  # Get your API key from https://www.alphavantage.co/support/#api-key
     )
