@@ -403,7 +403,6 @@ def connection_status(func):
 
 
 # Workaround for circular import with connection.py
-from Savvy
-Robot.modules import connection
+from SavvyRobot.modules import connection
 
 connected = connection.connected
