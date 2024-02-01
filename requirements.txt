@@ -34,7 +34,6 @@ pykeyboard==0.1.5
 pynewtonmath==1.0.1
 pyrate-limiter==2.0.1
 pyrogram==2.0.106
-python-telegram-bot==20.7
 regex==2023.12.25
 requests==2.31.0
 secureme==0.0.4
@@ -110,4 +109,4 @@ babel
 captcha
 async-timeout
 
-
+pip install git+https://github.com/python-telegram-bot/python-telegram-bot.git
