@@ -5,7 +5,8 @@ import asyncio
 from platform import python_version as y
 from sys import argv
 from pyrogram import __version__ as pyrover
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.constants import ParseMode
 from telegram import __version__ as telever
 from telegram.error import (
     BadRequest,
