@@ -23,7 +23,7 @@ from telegram.ext import (
     filters,
     MessageHandler,
 )
-from telegram.ext.Application import ApplicationHandlerStop
+from telegram.ext import ApplicationHandlerStop
 from telegram.utils.helpers import escape_markdown
 from telethon import __version__ as tlhver
 
