@@ -49,9 +49,9 @@ class ConnectionHistory(BASE):
         return "<connection user {} history {}>".format(self.user_id, self.chat_id)
 
 
-ChatAccessConnectionSettings.__table__.create(checkfirst=True)
-Connection.__table__.create(checkfirst=True)
-ConnectionHistory.__table__.create(checkfirst=True)
+ChatAccessConnectionSettings.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
+Connection.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
+ConnectionHistory.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
 
 CHAT_ACCESS_LOCK = threading.RLock()
 CONNECTION_INSERTION_LOCK = threading.RLock()
