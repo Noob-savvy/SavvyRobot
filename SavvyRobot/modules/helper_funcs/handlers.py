@@ -119,6 +119,14 @@ class CustomCommandHandler(CommandHandler):
             if isinstance(check_result[1], dict):
                 context.update(check_result[1])
 
+class CustomRegexHandler(MessageHandler):
+    def __init__(self, pattern, callback, friendly="", **kwargs):
+        super().__init__(filters.RegexPattern(pattern), callback, **kwargs)
+
+    def check_update(self, update: Update):
+        if isinstance(update, Update) and update.effective_message:
+            return self.filters(update)
+
 
 class CustomMessageHandler(MessageHandler):
     def __init__(self, filters, callback, friendly="", **kwargs):
