@@ -24,7 +24,7 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.ext import ApplicationHandlerStop
-from telegram.utils.helpers import escape_markdown
+from telegram.helpers import escape_markdown
 from telethon import __version__ as tlhver
 
 import SavvyRobot.modules.no_sql.users_db as sql
