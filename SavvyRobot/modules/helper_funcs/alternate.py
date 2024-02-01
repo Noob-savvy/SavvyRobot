@@ -1,6 +1,6 @@
 from functools import wraps
 
-from telegram import ChatAction
+from telegram.constants import ChatAction
 from telegram.error import BadRequest
 
 
