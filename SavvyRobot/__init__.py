@@ -160,7 +160,7 @@ DEV_USERS.add(6755880898)
 # <============================================== INITIALIZE APPLICATION =========================================================>
 # Initialize the application builder and add a handler
 dispatcher = Application.builder().token(TOKEN).build()
-function = dispatcher.add_handler
+updater = dispatcher.add_handler
 # <=======================================================================================================>
 
 # <================================================ BOOT MESSAGE=======================================================>
