@@ -108,5 +108,4 @@ loguru
 babel
 captcha
 async-timeout
-
-pip install git+https://github.com/python-telegram-bot/python-telegram-bot.git
+git+https://github.com/python-telegram-bot/python-telegram-bot.git
