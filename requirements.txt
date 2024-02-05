@@ -60,7 +60,7 @@ pyfiglet
 pendulum
 flag
 envparse
-flask==2.1.1
+flask==3.0.2
 werkzeug==2.0.3
 gtts
 pornhub_api
