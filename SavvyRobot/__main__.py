@@ -390,9 +390,9 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
             f"*ʜᴇʏ,*🥀\n  *ᴛʜɪs ɪs {dispatcher.bot.first_name}*"
             "\n*ᴀ ᴘᴏᴡᴇʀꜰᴜʟ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ  ʙᴜɪʟᴛ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇᴀꜱɪʟʏ ᴀɴᴅ ᴛᴏ ᴘʀᴏᴛᴇᴄᴛ ʏᴏᴜʀ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ꜱᴄᴀᴍᴍᴇʀꜱ ᴀɴᴅ ꜱᴘᴀᴍᴍᴇʀꜱ.*"
             "\n*ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ.*"
-            f"\n ᴜᴩᴛɪᴍᴇ »* {uptime}"
-            f"\n*  »* {sql.num_users()}"
-            f"\n*☞︎︎︎ ᴄʜᴀᴛs »* {sql.num_chats()}"
+            f"\n* ᴜᴩᴛɪᴍᴇ ➣* {uptime}"
+            f"\n* ᴜsᴇʀs ➣* {sql.num_users()}"
+            f"\n* ᴄʜᴀᴛs ➣* {sql.num_chats()}"
             "\n⌬ ɪ ᴄᴀɴ ʀᴇꜱᴛʀɪᴄᴛ ᴜꜱᴇʀꜱ."
             "\n⌬ ɪ ʜᴀᴠᴇ ᴀᴅᴠᴀɴᴄᴇ ᴀʀᴛɪғɪᴄɪᴀʟ ɪɴᴛᴇʟʟɪɢᴇɴᴄᴇ ᴍᴏᴅᴇʟs"
             "\n⌬ ɪ ʜᴀᴠᴇ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴛɪ-ꜰʟᴏᴏᴅ ꜱʏꜱᴛᴇᴍ."
@@ -411,12 +411,12 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"
+                            text="𑁍 ᴅᴇᴠᴇʟᴏᴘᴇʀ 𑁍", url=f"tg://user?id={OWNER_ID}"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"
+                            text="𑁍 ᴀɪ 𑁍", callback_data="source_"
                         ),
                         InlineKeyboardButton(
                             text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
@@ -424,14 +424,14 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="🚩sᴜᴩᴩᴏʀᴛ", callback_data="savvy_support"
+                            text="sᴜᴩᴩᴏʀᴛ", callback_data="savvy_support"
                         ),
                         InlineKeyboardButton(
-                            text="ᴄᴏᴍᴍᴀɴᴅs 💁", callback_data="Main_help"
+                            text="ᴄᴏᴍᴍᴀɴᴅs", callback_data="Main_help"
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="ʙᴀᴄᴋ◁", callback_data="savvy_back"),
+                        InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="savvy_back"),
                     ],
                 ]
             ),
