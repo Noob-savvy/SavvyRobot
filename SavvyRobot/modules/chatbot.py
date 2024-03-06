@@ -1,7 +1,6 @@
 import html
-import json
 import re
-from time import sleep
+
 import requests
 from telegram import (
     CallbackQuery,
@@ -22,7 +21,7 @@ from telegram.ext import (
 from telegram.utils.helpers import mention_html
 
 import SavvyRobot.modules.sql.chatbot_sql as sql
-from SavvyRobot import BOT_ID, BOT_NAME, BOT_USERNAME, dispatcher,CHATBOT_API
+from SavvyRobot import BOT_ID, BOT_USERNAME, CHATBOT_API, dispatcher
 from SavvyRobot.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from SavvyRobot.modules.log_channel import gloggable
 
@@ -128,16 +127,11 @@ def chatbot(update: Update, context: CallbackContext):
         if not mukesh_message(context, message):
             return
         bot.send_chat_action(chat_id, action="typing")
-        url=f"https://fallenxbot.vercel.app/api/apikey={CHATBOT_API}/group-controller/mukesh/message={message.text}"
+        url = f"https://fallenxbot.vercel.app/api/apikey={CHATBOT_API}/group-controller/mukesh/message={message.text}"
         response = requests.get(url)
-        out=response.json()
-        reply=out["reply"]
+        out = response.json()
+        reply = out["reply"]
         message.reply_text(reply)
-
-
-
-
-
 
 
 CHATBOTK_HANDLER = CommandHandler("chatbot", mukesh, run_async=True)

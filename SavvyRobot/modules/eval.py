@@ -22,6 +22,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
+
 import io
 import os
 
@@ -33,7 +34,7 @@ from contextlib import redirect_stdout
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
 
-from SavvyRobot import LOGGER, dispatcher,OWNER_ID
+from SavvyRobot import dispatcher
 from SavvyRobot.modules.helper_funcs.chat_status import dev_plus
 
 namespaces = {}
@@ -56,7 +57,9 @@ def namespace_of(chat, update, bot):
 def log_input(update):
     user = update.effective_user.id
     chat = update.effective_chat.id
-   # LOGGER.info(f"IN: {update.effective_message.text} (user={user}, chat={chat})")
+
+
+# LOGGER.info(f"IN: {update.effective_message.text} (user={user}, chat={chat})")
 
 
 def send(msg, bot, update):
@@ -65,7 +68,7 @@ def send(msg, bot, update):
             out_file.name = "output.txt"
             bot.send_document(chat_id=update.effective_chat.id, document=out_file)
     else:
-        #LOGGER.info(f"OUT: '{msg}'")
+        # LOGGER.info(f"OUT: '{msg}'")
         bot.send_message(
             chat_id=update.effective_chat.id,
             text=f"`{msg}`",

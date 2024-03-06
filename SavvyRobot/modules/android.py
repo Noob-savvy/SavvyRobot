@@ -24,10 +24,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from hurry.filesize import size as sizee
 from requests import get
-from telegram import InlineKeyboardButton
-from telegram import InlineKeyboardMarkup
-from telegram import ParseMode
-from telegram import Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 from ujson import loads

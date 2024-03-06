@@ -4,7 +4,8 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from SavvyRobot import OWNER_ID as owner_id
-from SavvyRobot import SUPPORT_CHAT as log,BOT_NAME,START_IMG
+from SavvyRobot import START_IMG
+from SavvyRobot import SUPPORT_CHAT as log
 from SavvyRobot import pbot as Client
 from SavvyRobot.utils.errors import capture_err
 
@@ -38,8 +39,6 @@ async def bug(_, msg: Message):
     )
     datetimes_fmt = "%d-%m-%Y"
     datetimes = datetime.utcnow().strftime(datetimes_fmt)
-
-    
 
     bug_report = f"""
 **#ʙᴜɢ : ** **tg://user?id={owner_id}**

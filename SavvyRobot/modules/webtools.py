@@ -24,12 +24,12 @@ from platform import python_version
 import requests
 import speedtest
 import telegram
-from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
+from psutil import boot_time, cpu_percent, disk_usage, virtual_memory
 from spamwatch import __version__ as __sw__
 from telegram import ParseMode, Update
-from telegram.ext import CommandHandler, Filters, CallbackContext
+from telegram.ext import CallbackContext, CommandHandler, Filters
 
-from SavvyRobot import dispatcher, OWNER_ID
+from SavvyRobot import OWNER_ID, dispatcher
 from SavvyRobot.modules.helper_funcs.alternate import typing_action
 from SavvyRobot.modules.helper_funcs.filters import CustomFilters
 

@@ -1,29 +1,21 @@
 from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import Message
+
 from SavvyRobot import (
+    API_HASH,
+    API_ID,
     BOT_NAME,
-    BOT_USERNAME,
-    LOGGER,
+    MONGO_DB_URI,
     OWNER_ID,
     START_IMG,
     SUPPORT_CHAT,
     TOKEN,
-    StartTime,
-    dispatcher,
-    pbot,
-    telethn,
-    updater,
-    MONGO_DB_URI,
-    API_ID,
-    API_HASH
 )
-
-from SavvyRobot import BOT_NAME,OWNER_ID
 from SavvyRobot import pbot as app
-@app.on_message(
-    filters.command(["con", "var"]) & filters.user(OWNER_ID)
-)
+
+
+@app.on_message(filters.command(["con", "var"]) & filters.user(OWNER_ID))
 async def get_vars(_, message: Message):
     try:
         await app.send_message(
@@ -40,7 +32,8 @@ async def get_vars(_, message: Message):
 
 
 
-""")
+""",
+        )
     except:
         return await message.reply_text("» ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ᴛʜᴇ ᴄᴏɴғɪɢ ᴠᴀʀɪᴀʙʟᴇs.")
     if message.chat.type != ChatType.PRIVATE:

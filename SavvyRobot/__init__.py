@@ -1,9 +1,9 @@
+import ast
+import base64
 import logging
 import os
 import sys
 import time
-import ast
-import base64
 
 import telegram.ext as tg
 from aiohttp import ClientSession
@@ -37,7 +37,7 @@ if ENV:
 
     API_ID = int(os.environ.get("API_ID", None))
     API_HASH = os.environ.get("API_HASH", None)
-    
+
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
     CASH_API_KEY = os.environ.get("CASH_API_KEY", None)
@@ -48,9 +48,7 @@ if ENV:
     LOAD = os.environ.get("LOAD", "").split()
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     NO_LOAD = os.environ.get("NO_LOAD", "").split()
-    START_IMG = os.environ.get(
-        "START_IMG", ""
-    )
+    START_IMG = os.environ.get("START_IMG", "")
     STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", True))
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "the_friendz")
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
@@ -72,7 +70,9 @@ if ENV:
 
     try:
         DRAGONS = set(int(x) for x in os.environ.get("DRAGONS", "6195725562").split())
-        DEV_USERS = set(int(x) for x in os.environ.get("DEV_USERS", "6195725562").split())
+        DEV_USERS = set(
+            int(x) for x in os.environ.get("DEV_USERS", "6195725562").split()
+        )
     except ValueError:
         raise Exception("Your sudo or dev users list does not contain valid integers.")
 
@@ -157,7 +157,9 @@ DEV_USERS.add(abs(0b101100001110010100011000111101001))
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("savvy", API_ID, API_HASH)
 
-pbot = Client("SavvyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN,in_memory=True)
+pbot = Client(
+    "SavvyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN, in_memory=True
+)
 dispatcher = updater.dispatcher
 aiohttpsession = ClientSession()
 
@@ -166,7 +168,7 @@ BOT_ID = dispatcher.bot.id
 BOT_NAME = dispatcher.bot.first_name
 BOT_USERNAME = dispatcher.bot.username
 
-DRAGONS = list(DRAGONS) + list(DEV_USERS) 
+DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)

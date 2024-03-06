@@ -5,8 +5,9 @@ from faker import Faker
 from faker.providers import internet
 from telethon import events
 
-from SavvyRobot.modules.helper_funcs.chat_status import (is_user_admin)
 from SavvyRobot import telethn as Galaxy
+from SavvyRobot.modules.helper_funcs.chat_status import is_user_admin
+
 
 @Galaxy.on(events.NewMessage(pattern="/fakegen$"))
 async def hi(event):

@@ -1,29 +1,27 @@
 import importlib
 import re
 import time
-import asyncio
 from platform import python_version as y
 from sys import argv
+
 from pyrogram import __version__ as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.constants import ParseMode
 from telegram import __version__ as telever
+from telegram.constants import ParseMode
 from telegram.error import (
     BadRequest,
     ChatMigrated,
     NetworkError,
     TelegramError,
     TimedOut,
-    Forbidden,
 )
 from telegram.ext import (
+    ApplicationHandlerStop,
     CallbackContext,
     CallbackQueryHandler,
     CommandHandler,
-    filters,
     MessageHandler,
 )
-from telegram.ext import ApplicationHandlerStop
 from telegram.helpers import escape_markdown
 from telethon import __version__ as tlhver
 
@@ -70,6 +68,8 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
 
     return ping_time
+
+
 PM_START_TEX = """
 ʜᴇʟʟᴏ `{}`, ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . . 
 """
@@ -91,17 +91,17 @@ PM_START_TEXT = """
 """
 
 buttons = [
-  [
+    [
         InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
-       InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-      ],
-      [
-         InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
-      ],
-      [
-          InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
-          InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
-     ],
+        InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
+    ],
+    [
+        InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
+    ],
+    [
+        InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
+        InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
+    ],
     [
         InlineKeyboardButton(
             text="Aᴅᴅ Mᴇ ᴛᴏ Yᴏᴜʀ Gʀᴏᴜᴘ",
@@ -111,8 +111,6 @@ buttons = [
     [
         InlineKeyboardButton(text="📚 ʜᴇʟᴘ ᴀɴᴅ ᴄᴏᴍᴍᴀɴᴅs", callback_data="Main_help"),
     ],
-    
-
 ]
 
 HELP_STRINGS = f"""
@@ -181,6 +179,7 @@ def send_help(chat_id, text, keyboard=None):
         reply_markup=keyboard,
     )
 
+
 def start(update: Update, context: CallbackContext):
     args = context.args
     global uptime
@@ -216,9 +215,10 @@ def start(update: Update, context: CallbackContext):
 
         else:
             first_name = update.effective_user.first_name
-            
-            x=update.effective_message.reply_sticker(
-                "CAACAgUAAxkBAAI33mLYLNLilbRI-sKAAob0P7koTEJNAAIOBAACl42QVKnra4sdzC_uKQQ")
+
+            x = update.effective_message.reply_sticker(
+                "CAACAgUAAxkBAAI33mLYLNLilbRI-sKAAob0P7koTEJNAAIOBAACl42QVKnra4sdzC_uKQQ"
+            )
             x.delete()
             usr = update.effective_user
             lol = update.effective_message.reply_text(
@@ -232,8 +232,15 @@ def start(update: Update, context: CallbackContext):
             lol.edit_text("ꜱᴛᴀʀᴛɪɴɢ... ")
             time.sleep(0.4)
             lol.delete()
-            
-            update.effective_message.reply_photo(START_IMG,PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME,sql.num_users(),sql.num_chats()),
+
+            update.effective_message.reply_photo(
+                START_IMG,
+                PM_START_TEXT.format(
+                    escape_markdown(first_name),
+                    BOT_NAME,
+                    sql.num_users(),
+                    sql.num_chats(),
+                ),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -324,17 +331,27 @@ def help_button(update, context):
                 )
                 + HELPABLE[module].__help__
             )
-            query.message.edit_caption(text,
+            query.message.edit_caption(
+                text,
                 parse_mode=ParseMode.MARKDOWN,
-                
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back"),InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support")]]
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="ʙᴀᴄᴋ", callback_data="help_back"
+                            ),
+                            InlineKeyboardButton(
+                                text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"
+                            ),
+                        ]
+                    ]
                 ),
             )
 
         elif prev_match:
             curr_page = int(prev_match.group(1))
-            query.message.edit_caption(HELP_STRINGS,
+            query.message.edit_caption(
+                HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(curr_page - 1, HELPABLE, "help")
@@ -343,7 +360,8 @@ def help_button(update, context):
 
         elif next_match:
             next_page = int(next_match.group(1))
-            query.message.edit_caption(HELP_STRINGS,
+            query.message.edit_caption(
+                HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(next_page + 1, HELPABLE, "help")
@@ -351,7 +369,8 @@ def help_button(update, context):
             )
 
         elif back_match:
-            query.message.edit_caption(HELP_STRINGS,
+            query.message.edit_caption(
+                HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(0, HELPABLE, "help")
@@ -370,7 +389,8 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "savvy_":
         uptime = get_readable_time((time.time() - StartTime))
-        query.message.edit_caption(f"*ʜᴇʏ,*🥀\n  *ᴛʜɪs ɪs {dispatcher.bot.first_name}*"
+        query.message.edit_caption(
+            f"*ʜᴇʏ,*🥀\n  *ᴛʜɪs ɪs {dispatcher.bot.first_name}*"
             "\n*ᴀ ᴘᴏᴡᴇʀꜰᴜʟ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ  ʙᴜɪʟᴛ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇᴀꜱɪʟʏ ᴀɴᴅ ᴛᴏ ᴘʀᴏᴛᴇᴄᴛ ʏᴏᴜʀ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ꜱᴄᴀᴍᴍᴇʀꜱ ᴀɴᴅ ꜱᴘᴀᴍᴍᴇʀꜱ.*"
             "\n*ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ.*"
             "\n\n────────────────────"
@@ -385,20 +405,27 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
             "\n💠 ɪ ʜᴀᴠᴇ ᴀ ɴᴏᴛᴇ ᴋᴇᴇᴘɪɴɢ ꜱʏꜱᴛᴇᴍ, ʙʟᴀᴄᴋʟɪꜱᴛꜱ, ᴀɴᴅ ᴇᴠᴇɴ ᴘʀᴇᴅᴇᴛᴇʀᴍɪɴᴇᴅ ʀᴇᴘʟɪᴇꜱ ᴏɴ ᴄᴇʀᴛᴀɪɴ ᴋᴇʏᴡᴏʀᴅꜱ."
             f"\n\nℹ️ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ {dispatcher.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-        InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
-       InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-      ],
-      [
-         InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
-      ],
-      [
-          InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
-          InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
-     ],
+                        InlineKeyboardButton(
+                            text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"
+                        ),
+                        InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"
+                        ),
+                        InlineKeyboardButton(
+                            text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
+                        ),
+                    ],
                     [
                         InlineKeyboardButton(
                             text="🚩sᴜᴩᴩᴏʀᴛ", callback_data="savvy_support"
@@ -407,7 +434,6 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
                             text="ᴄᴏᴍᴍᴀɴᴅs 💁", callback_data="Main_help"
                         ),
                     ],
-            
                     [
                         InlineKeyboardButton(text="ʙᴀᴄᴋ◁", callback_data="savvy_back"),
                     ],
@@ -415,22 +441,31 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
             ),
         )
     elif query.data == "savvy_support":
-        query.message.edit_caption("**๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ʜᴇʟᴩ ᴀɴᴅ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀ**"
+        query.message.edit_caption(
+            "**๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ʜᴇʟᴩ ᴀɴᴅ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀ**"
             f"\n\nɪғ ʏᴏᴜ ғᴏᴜɴᴅ ᴀɴʏ ʙᴜɢ ɪɴ {dispatcher.bot.first_name} ᴏʀ ɪғ ʏᴏᴜ ᴡᴀɴɴᴀ ɢɪᴠᴇ ғᴇᴇᴅʙᴀᴄᴋ ᴀʙᴏᴜᴛ ᴛʜᴇ {dispatcher.bot.first_name}, ᴩʟᴇᴀsᴇ ʀᴇᴩᴏʀᴛ ɪᴛ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-        InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
-       InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-      ],
-      [
-         InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
-      ],
-      [
-          InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
-          InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
-     ],
+                        InlineKeyboardButton(
+                            text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"
+                        ),
+                        InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"
+                        ),
+                        InlineKeyboardButton(
+                            text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
+                        ),
+                    ],
                     [
                         InlineKeyboardButton(
                             text="🏡 sᴜᴩᴩᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"
@@ -439,7 +474,6 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
                             text="ᴜᴩᴅᴀᴛᴇs 🍷", url=f"https://t.me/savvy_robot"
                         ),
                     ],
-                
                     [
                         InlineKeyboardButton(text="◁", callback_data="savvy_"),
                     ],
@@ -447,40 +481,56 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
             ),
         )
     elif query.data == "savvy_back":
-        first_name = update.effective_user.first_name 
-        query.message.edit_caption(PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME,sql.num_users(),sql.num_chats()),
+        first_name = update.effective_user.first_name
+        query.message.edit_caption(
+            PM_START_TEXT.format(
+                escape_markdown(first_name), BOT_NAME, sql.num_users(), sql.num_chats()
+            ),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
         )
+
+
 def SavvyRobot_Main_Callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "Main_help":
-        query.message.edit_caption(f"""
+        query.message.edit_caption(
+            f"""
  ʜᴇʀᴇ ɪꜱ ʜᴇʟᴘ ᴍᴇɴᴜ ꜰᴏʀ {BOT_NAME}
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="📕 Mᴀɴᴀɢᴇᴍᴇɴᴛ", callback_data="help_back"),
-                        InlineKeyboardButton(text="Mᴜsɪᴄ ♫︎", callback_data="Music_")
+                        InlineKeyboardButton(
+                            text="📕 Mᴀɴᴀɢᴇᴍᴇɴᴛ", callback_data="help_back"
+                        ),
+                        InlineKeyboardButton(text="Mᴜsɪᴄ ♫︎", callback_data="Music_"),
                     ],
                     [
-                        InlineKeyboardButton(text="💁 Bᴀsɪᴄ ", callback_data="basic_help"),
-                        InlineKeyboardButton(text="Exᴘᴇʀᴛ 👮", callback_data="expert_help")
+                        InlineKeyboardButton(
+                            text="💁 Bᴀsɪᴄ ", callback_data="basic_help"
+                        ),
+                        InlineKeyboardButton(
+                            text="Exᴘᴇʀᴛ 👮", callback_data="expert_help"
+                        ),
                     ],
                     [
-                        InlineKeyboardButton(text="🍹 Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
-                        InlineKeyboardButton(text="Dᴏɴᴀᴛɪᴏɴ 🎉", callback_data="donation_help") 
+                        InlineKeyboardButton(
+                            text="🍹 Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"
+                        ),
+                        InlineKeyboardButton(
+                            text="Dᴏɴᴀᴛɪᴏɴ 🎉", callback_data="donation_help"
+                        ),
                     ],
-                    [InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="savvy_back")]
+                    [InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="savvy_back")],
                 ]
             ),
         )
-    elif query.data=="basic_help":
-        query.message.edit_caption("""Bᴀsɪᴄ Cᴏᴍᴍᴀɴᴅs.
+    elif query.data == "basic_help":
+        query.message.edit_caption(
+            """Bᴀsɪᴄ Cᴏᴍᴍᴀɴᴅs.
 👮🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs & Mᴏᴅᴇʀᴀᴛᴏʀs.
 🕵🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs.
 
@@ -492,18 +542,24 @@ def SavvyRobot_Main_Callback(update: Update, context: CallbackContext):
 👮🏻 /unban ʟᴇᴛs ʏᴏᴜ ʀᴇᴍᴏᴠᴇ ᴀ ᴜsᴇʀ ғʀᴏᴍ ɢʀᴏᴜᴘ's ʙʟᴀᴄᴋʟɪsᴛ, ɢɪᴠɪɴɢ ᴛʜᴇᴍ ᴛʜᴇ ᴘᴏssɪʙɪʟɪᴛʏ ᴛᴏ Jᴏɪɴ ᴀɢᴀɪɴ ᴡɪᴛʜ ᴛʜᴇ ʟɪɴᴋ ᴏғ ᴛʜᴇ ɢʀᴏᴜᴘ.
 👮🏻 /info ɢɪᴠᴇs ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ᴜsᴇʀ.
 
-◽️ /staff ɢɪᴠᴇs ᴛʜᴇ ᴄᴏᴍᴘʟᴇᴛᴇ Lɪsᴛ ᴏғ ɢʀᴏᴜᴘ Sᴛᴀғғ!.""",parse_mode=ParseMode.MARKDOWN,
-            
+◽️ /staff ɢɪᴠᴇs ᴛʜᴇ ᴄᴏᴍᴘʟᴇᴛᴇ Lɪsᴛ ᴏғ ɢʀᴏᴜᴘ Sᴛᴀғғ!.""",
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support")
+                        InlineKeyboardButton(
+                            text="• ʙᴀᴄᴋ •", callback_data="Main_help"
+                        ),
+                        InlineKeyboardButton(
+                            text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
-            )
-    elif query.data=="savvy_back":
-        query.message.edit_caption("""Exᴘᴇʀᴛ ᴄᴏᴍᴍᴀɴᴅs
+        )
+    elif query.data == "savvy_back":
+        query.message.edit_caption(
+            """Exᴘᴇʀᴛ ᴄᴏᴍᴍᴀɴᴅs
 
 👥 Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ ᴀʟʟ ᴜsᴇʀs
 👮🏻 Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs & Mᴏᴅᴇʀᴀᴛᴏʀs.
@@ -519,18 +575,24 @@ Pɪɴɴᴇᴅ Mᴇssᴀɢᴇs
 🕵🏻  /adminlist ʟɪsᴛ ᴏғ ᴀʟʟ ᴛʜᴇ sᴘᴇᴄɪᴀʟ ʀᴏʟᴇs ᴀssɪɢɴᴇᴅ ᴛᴏ ᴜsᴇʀs.
 
 ◽️ /bug: (ᴍᴇssᴀɢᴇ) ᴛᴏ Sᴇɴᴅ ᴍᴇssᴀɢᴇ ᴀɴᴅ ᴇʀʀᴏʀs ᴡʜɪᴄʜ ʏᴏᴜ ᴀʀᴇ ғᴀᴄɪɴɢ 
-ᴇx: /bug Hᴇʏ Tʜᴇʀᴇ Is ᴀ Sᴏᴍᴇᴛʜɪɴɢ Eʀʀᴏʀ @username ᴏғ ᴄʜᴀᴛ! .""",parse_mode=ParseMode.MARKDOWN,
-            
+ᴇx: /bug Hᴇʏ Tʜᴇʀᴇ Is ᴀ Sᴏᴍᴇᴛʜɪɴɢ Eʀʀᴏʀ @username ᴏғ ᴄʜᴀᴛ! .""",
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support")
+                        InlineKeyboardButton(
+                            text="• ʙᴀᴄᴋ •", callback_data="Main_help"
+                        ),
+                        InlineKeyboardButton(
+                            text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
-            )                                        
-    elif query.data=="advance_help":
-        query.message.edit_caption("""Aᴅᴠᴀɴᴄᴇᴅ Cᴏᴍᴍᴀɴᴅs
+        )
+    elif query.data == "advance_help":
+        query.message.edit_caption(
+            """Aᴅᴠᴀɴᴄᴇᴅ Cᴏᴍᴍᴀɴᴅs
 
 👮🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs & Mᴏᴅᴇʀᴀᴛᴏʀs.
 🕵🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs.
@@ -542,18 +604,24 @@ Wᴀʀɴ Mᴀɴᴀɢᴇᴍᴇɴᴛ
 👮🏻  /warns ʟᴇᴛs ʏᴏᴜ sᴇᴇ ᴀɴᴅ ᴍᴀɴᴀɢᴇ ᴜsᴇʀ ᴡᴀʀɴs
 
 🛃  /del ᴅᴇʟᴇᴛᴇs ᴛʜᴇ sᴇʟᴇᴄᴛᴇᴅ ᴍᴇssᴀɢᴇ
-🛃  /purge ᴅᴇʟᴇᴛᴇs ғʀᴏᴍ ᴛʜᴇ sᴇʟᴇᴄᴛᴇᴅ ᴍᴇssᴀɢᴇ.""",parse_mode=ParseMode.MARKDOWN,
-            
+🛃  /purge ᴅᴇʟᴇᴛᴇs ғʀᴏᴍ ᴛʜᴇ sᴇʟᴇᴄᴛᴇᴅ ᴍᴇssᴀɢᴇ.""",
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support")
+                        InlineKeyboardButton(
+                            text="• ʙᴀᴄᴋ •", callback_data="Main_help"
+                        ),
+                        InlineKeyboardButton(
+                            text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
-            )
-    elif query.data=="expert_help":
-        query.message.edit_caption(f"""━━━━━━━━━━✰✰✰━━━━━━━━━━
+        )
+    elif query.data == "expert_help":
+        query.message.edit_caption(
+            f"""━━━━━━━━━━✰✰✰━━━━━━━━━━
 ᴍᴀᴋᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇꜰꜰᴇᴄᴛɪᴠᴇ ɴᴏᴡ :
 🎉 ᴄᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴꜱ 🎉
 [{BOT_NAME}]("https://t.me/{BOT_USERNAME}") ɴᴏᴡ ʀᴇᴀᴅʏ ᴛᴏ
@@ -570,41 +638,63 @@ Wᴀʀɴ Mᴀɴᴀɢᴇᴍᴇɴᴛ
 ᴡᴇʟᴄᴏᴍᴇ ɴᴇᴡ ᴜꜱᴇʀꜱ ᴄᴏᴍɪɴɢ ᴛᴏ
 ʏᴏᴜʀ ɢʀᴏᴜᴘ.
 ꜱᴇɴᴅ /setwelcome ᴍᴇꜱꜱᴀɢᴇ ᴛᴏ
-ꜱᴇᴛ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇꜱꜱᴀɢᴇ!""",parse_mode=ParseMode.MARKDOWN,
-            
+ꜱᴇᴛ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇꜱꜱᴀɢᴇ!""",
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support")
+                        InlineKeyboardButton(
+                            text="• ʙᴀᴄᴋ •", callback_data="Main_help"
+                        ),
+                        InlineKeyboardButton(
+                            text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
-            )
-    elif query.data=="donation_help":
-        query.message.edit_caption("""Aʀᴇ ʏᴏᴜ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ ʜᴇʟᴘɪɴɢ ᴍʏ ᴄʀᴇᴀᴛᴏʀ ᴡɪᴛʜ ʜɪs ᴇғғᴏʀᴛs ᴛᴏ ᴋᴇᴇᴘ ᴍᴇ ɪɴ ᴀᴄᴛɪᴠᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ? Iғ ʏᴇs, Yᴏᴜ'ʀᴇ ɪɴ ᴛʜᴇ ʀɪɢʜᴛ ᴘʟᴀᴄᴇ. 
+        )
+    elif query.data == "donation_help":
+        query.message.edit_caption(
+            """Aʀᴇ ʏᴏᴜ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ ʜᴇʟᴘɪɴɢ ᴍʏ ᴄʀᴇᴀᴛᴏʀ ᴡɪᴛʜ ʜɪs ᴇғғᴏʀᴛs ᴛᴏ ᴋᴇᴇᴘ ᴍᴇ ɪɴ ᴀᴄᴛɪᴠᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ? Iғ ʏᴇs, Yᴏᴜ'ʀᴇ ɪɴ ᴛʜᴇ ʀɪɢʜᴛ ᴘʟᴀᴄᴇ. 
 
 Wᴇ ᴇᴍᴘʜᴀsɪsᴇ ᴛʜᴇ ɪᴍᴘᴏʀᴛᴀɴᴄᴇ ᴏғ ɴᴇᴇᴅɪɴɢ ғᴜɴᴅs ᴛᴏ ᴋᴇᴇᴘ SᴀᴠᴠʏRᴏʙᴏᴛ ᴜɴᴅᴇʀ ᴀᴄᴛɪᴠᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ. Yᴏᴜʀ ᴅᴏɴᴀᴛɪᴏɴs ɪɴ ᴀɴʏ ᴀᴍᴏᴜɴᴛ ᴏғ ᴍᴏɴᴇʏ ᴛᴏ SᴀᴠᴠʏRᴏʙᴏᴛ sᴇʀᴠᴇʀs ᴀɴᴅ ᴏᴛʜᴇʀ ᴜᴛɪʟɪᴛɪᴇs ᴡɪʟʟ ᴀʟʟᴏᴡ ᴜs ᴛᴏ sᴜsᴛᴀɪɴ ᴛʜᴇ ʟɪғᴇsᴘᴀɴ ɪɴ ᴛʜᴇ ʟᴏɴɢ ᴛᴇʀᴍ. Wᴇ ᴡɪʟʟ ᴜsᴇ ᴀʟʟ ᴏғ ᴛʜᴇ ᴅᴏɴᴀᴛɪᴏɴs ᴛᴏ ᴄᴏᴠᴇʀ ғᴜᴛᴜʀᴇ ᴇxᴘᴇɴsᴇs ᴀɴᴅ ᴜᴘɢʀᴀᴅᴇs ᴏғ ᴛʜᴇ sᴇʀᴠᴇʀs ᴄᴏsᴛs. Iғ ʏᴏᴜ'ᴠᴇ ɢᴏᴛ sᴘᴀʀᴇ ᴍᴏɴᴇʏ ᴛᴏ ʜᴇʟᴘ ᴜs ɪɴ ᴛʜɪs ᴇғғᴏʀᴛ, Kɪɴᴅʟʏ ᴅᴏ sᴏ ᴀɴᴅ ʏᴏᴜʀ ᴅᴏɴᴀᴛɪᴏɴs ᴄᴀɴ ᴀʟsᴏ ᴍᴏᴛɪᴠᴀᴛᴇ ᴜs ᴋᴇᴇᴘ ʙʀɪɴɢ ᴏɴ ɴᴇᴡ ғᴇᴀᴛᴜʀᴇs.
 
-Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ ᴅᴏɴᴀᴛɪᴏɴs""",parse_mode=ParseMode.MARKDOWN,
-            
+Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ ᴅᴏɴᴀᴛɪᴏɴs""",
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
-                [  [
-        InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
-       InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-      ],
-      [
-         InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
-      ],
-      [
-          InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
-          InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
-     ],
+                [
                     [
-                        InlineKeyboardButton(text="• Dᴏɴᴀᴛᴇ •", url="https://t.me/noob_savvy_official"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support")
-                    ]
+                        InlineKeyboardButton(
+                            text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"
+                        ),
+                        InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"
+                        ),
+                        InlineKeyboardButton(
+                            text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="• Dᴏɴᴀᴛᴇ •", url="https://t.me/noob_savvy_official"
+                        ),
+                        InlineKeyboardButton(
+                            text="• sᴜᴘᴘᴏʀᴛ •", callback_data="savvy_support"
+                        ),
+                    ],
                 ]
             ),
-            )  
+        )
+
+
 def Source_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "source_":
@@ -623,58 +713,65 @@ def Source_about_callback(update: Update, context: CallbackContext):
 © 2023 - 2024 | [sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛ](https://t.me/{SUPPORT_CHAT}), ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ.
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
-                 [
-        InlineKeyboardButton(text="◕ 𝐎ᴡɴᴇʀ ◕", url="https://t.me/noob_savvy")
+                [InlineKeyboardButton(text="◕ 𝐎ᴡɴᴇʀ ◕", url="https://t.me/noob_savvy")],
+                [
+                    InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
+                    InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
                 ],
                 [
-        InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
-       InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-      ],
-      [
-         InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
-      ],
-      [
-          InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
-          InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
-      ],
-      
+                    InlineKeyboardButton(
+                        text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"
+                    ),
+                ],
+                [
+                    InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
+                    InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
+                ],
             ),
         )
-      
+
     elif query.data == "source_back":
         first_name = update.effective_user.first_name
         query.message.edit_caption(
-            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME,sql.num_users(),sql.num_chats()),
+            PM_START_TEXT.format(
+                escape_markdown(first_name), BOT_NAME, sql.num_users(), sql.num_chats()
+            ),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
-            
         )
 
-        
+
 def Music_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "Music_":
-        query.message.edit_caption(f"""
+        query.message.edit_caption(
+            f"""
  ʜᴇʀᴇ ɪꜱ ʜᴇʟᴘ ᴍᴇɴᴜ ꜰᴏʀ ᴍᴜꜱɪᴄ 
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-        InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
-       InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-      ],
-      [
-         InlineKeyboardButton(text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"),
-      ],
-      [
-          InlineKeyboardButton(text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"),
-          InlineKeyboardButton(text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"),
-     ],
+                        InlineKeyboardButton(
+                            text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"
+                        ),
+                        InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💠ᴅᴇᴠᴇʟᴏᴘᴇʀ 💠", url=f"tg://user?id={OWNER_ID}"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="𑁍 ᴍᴏᴅᴜʟᴇs 𑁍", callback_data="source_"
+                        ),
+                        InlineKeyboardButton(
+                            text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
+                        ),
+                    ],
                     [
                         InlineKeyboardButton(
                             text="⍟ ᴀᴅᴍɪɴ ⍟", callback_data="Music_admin"
@@ -690,14 +787,13 @@ def Music_about_callback(update: Update, context: CallbackContext):
                             callback_data="Music_extra",
                         ),
                     ],
-                    [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help")
-                    ],
+                    [InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help")],
                 ]
             ),
         )
     elif query.data == "Music_admin":
-        query.message.edit_caption(f"*» ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
+        query.message.edit_caption(
+            f"*» ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
             f"""
 ᴊᴜsᴛ ᴀᴅᴅ *ᴄ* ɪɴ ᴛʜᴇ sᴛᴀʀᴛɪɴɢ ᴏғ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴜsᴇ ᴛʜᴇᴍ ғᴏʀ ᴄʜᴀɴɴᴇʟ.
 
@@ -714,17 +810,20 @@ def Music_about_callback(update: Update, context: CallbackContext):
 /queue : sʜᴏᴡs ᴛʜᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋs ʟɪsᴛ.
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text=" ʙᴀᴄᴋ ", callback_data="Music_"),InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support")
+                        InlineKeyboardButton(text=" ʙᴀᴄᴋ ", callback_data="Music_"),
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
         )
     elif query.data == "Music_play":
-        query.message.edit_caption(f"*» ᴘʟᴀʏ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
+        query.message.edit_caption(
+            f"*» ᴘʟᴀʏ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
             f"""
 /play or /vplay or /cplay  - ʙᴏᴛ ᴡɪʟʟ ꜱᴛᴀʀᴛ ᴘʟᴀʏɪɴɢ ʏᴏᴜʀ ɢɪᴠᴇɴ ϙᴜᴇʀʏ on ᴠᴏɪᴄᴇ ᴄʜᴀᴛ ᴏʀ ꜱᴛʀᴇᴀᴍ ʟɪᴠᴇ ʟɪɴᴋꜱ ᴏɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛꜱ.
 
@@ -740,17 +839,20 @@ def Music_about_callback(update: Update, context: CallbackContext):
 /play  - ꜱᴛᴀʀᴛ ᴘʟᴀʏɪɴɢ ʏᴏᴜʀ ꜱᴀᴠᴇᴅ ᴘʟᴀʏʟɪꜱᴛ ғʀᴏᴍ ꜱᴇʀᴠᴇʀꜱ.
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Music_"),InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support")
+                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Music_"),
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
         )
     elif query.data == "Music_bot":
-        query.message.edit_caption(f"*» ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
+        query.message.edit_caption(
+            f"*» ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
             f"""
 /stats - ɢᴇᴛ ᴛᴏᴘ 10 ᴛʀᴀᴄᴋꜱ ɢʟᴏʙᴀʟ ꜱᴛᴀᴛꜱ, ᴛᴏᴘ 10 ᴜꜱᴇʀꜱ ᴏғ ʙᴏᴛ, ᴛᴏᴘ 10 ᴄʜᴀᴛꜱ ᴏɴ ʙᴏᴛ, ᴛᴏᴘ 10 ᴘʟᴀʏᴇᴅ ɪɴ ᴀ ᴄʜᴀᴛ ᴇᴛᴄ ᴇᴛᴄ.
 
@@ -767,17 +869,20 @@ c ꜱᴛᴀɴᴅꜱ ꜰᴏʀ ᴄʜᴀɴɴᴇʟ ᴘʟᴀʏ.
 /queue ᴏʀ /cqueue- ᴄʜᴇᴄᴋ Qᴜᴇᴜᴇ ʟɪꜱᴛ ᴏꜰ ᴍᴜꜱɪᴄ.
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text=" ʙᴀᴄᴋ ", callback_data="Music_"),InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support")
+                        InlineKeyboardButton(text=" ʙᴀᴄᴋ ", callback_data="Music_"),
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
         )
     elif query.data == "Music_extra":
-        query.message.edit_caption(f"*» ᴇxᴛʀᴀ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
+        query.message.edit_caption(
+            f"*» ᴇxᴛʀᴀ ᴄᴏᴍᴍᴀɴᴅꜱ «*"
             f"""
 /mstart - ꜱᴛᴀʀᴛ ᴛʜᴇ ᴍᴜꜱɪᴄ ʙᴏᴛ.
 /mhelp  - ɢᴇᴛ ᴄᴏᴍᴍᴀɴᴅꜱ ʜᴇʟᴘᴇʀ ᴍᴇɴᴜ ᴡɪᴛʜ ᴅᴇᴛᴀɪʟᴇᴅ ᴇxᴘʟᴀɴᴀᴛɪᴏɴꜱ ᴏғ ᴄᴏᴍᴍᴀɴᴅꜱ.
@@ -787,22 +892,24 @@ c ꜱᴛᴀɴᴅꜱ ꜰᴏʀ ᴄʜᴀɴɴᴇʟ ᴘʟᴀʏ.
 /settings - ɢᴇᴛ a ᴄᴏᴍᴘʟᴇᴛᴇ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ ᴡɪᴛʜ ɪɴʟɪɴᴇ ʙᴜᴛᴛᴏɴꜱ
 """,
             parse_mode=ParseMode.MARKDOWN,
-            
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text=" ʙᴀᴄᴋ ", callback_data="Music_"),InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support")
+                        InlineKeyboardButton(text=" ʙᴀᴄᴋ ", callback_data="Music_"),
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"
+                        ),
                     ]
                 ]
             ),
         )
     elif query.data == "Savvy_back":
         first_name = update.effective_user.first_name
-        query.message.edit_caption(PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
+        query.message.edit_caption(
+            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
-
         )
 
 
@@ -814,7 +921,8 @@ def get_help(update: Update, context: CallbackContext):
     if chat.type != chat.PRIVATE:
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
-            update.effective_message.reply_photo(START_IMG,
+            update.effective_message.reply_photo(
+                START_IMG,
                 f"Contact me in PM to get help of {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -830,13 +938,17 @@ def get_help(update: Update, context: CallbackContext):
                 ),
             )
             return
-        update.effective_message.reply_photo(START_IMG,"» Wʜᴇʀᴇ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴏᴘᴇɴ ᴛʜᴇ sᴇᴛᴛɪɴɢs ᴍᴇɴᴜ?.",
+        update.effective_message.reply_photo(
+            START_IMG,
+            "» Wʜᴇʀᴇ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴏᴘᴇɴ ᴛʜᴇ sᴇᴛᴛɪɴɢs ᴍᴇɴᴜ?.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
                             text="👤 ᴏᴩᴇɴ ɪɴ ᴩʀɪᴠᴀᴛᴇ ᴄʜᴀᴛ",
-                            url="https://t.me/{}?start=help".format(context.bot.username),
+                            url="https://t.me/{}?start=help".format(
+                                context.bot.username
+                            ),
                         )
                     ],
                     [
@@ -862,7 +974,14 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back"),InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support")]]
+                [
+                    [
+                        InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back"),
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"
+                        ),
+                    ]
+                ]
             ),
         )
 
@@ -927,7 +1046,8 @@ def settings_button(update: Update, context: CallbackContext):
             text = "*{}* has the following settings for the *{}* module:\n\n".format(
                 escape_markdown(chat.title), CHAT_SETTINGS[module].__mod_name__
             ) + CHAT_SETTINGS[module].__chat_settings__(chat_id, user.id)
-            query.message.reply_text(text,
+            query.message.reply_text(
+                text,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -945,8 +1065,11 @@ def settings_button(update: Update, context: CallbackContext):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("""Hi there! There are quite a few settings for {} - go ahead and pick what "
-                you're interested in.""".format(chat.title),
+            query.message.reply_text(
+                """Hi there! There are quite a few settings for {} - go ahead and pick what "
+                you're interested in.""".format(
+                    chat.title
+                ),
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(
                         curr_page - 1, CHAT_SETTINGS, "stngs", chat=chat_id
@@ -958,9 +1081,11 @@ def settings_button(update: Update, context: CallbackContext):
             chat_id = next_match.group(1)
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text(text=
-                """Hi there! There are quite a few settings for {} - go ahead and pick what 
-                you're interested in.""".format(chat.title),
+            query.message.reply_text(
+                text="""Hi there! There are quite a few settings for {} - go ahead and pick what 
+                you're interested in.""".format(
+                    chat.title
+                ),
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(
                         next_page + 1, CHAT_SETTINGS, "stngs", chat=chat_id
@@ -971,8 +1096,11 @@ def settings_button(update: Update, context: CallbackContext):
         elif back_match:
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("""Hi there! There are quite a few settings for {} - go ahead and pick what 
-                you're interested in.""".format(escape_markdown(chat.title)),
+            query.message.reply_text(
+                """Hi there! There are quite a few settings for {} - go ahead and pick what 
+                you're interested in.""".format(
+                    escape_markdown(chat.title)
+                ),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
@@ -1000,7 +1128,9 @@ def get_settings(update: Update, context: CallbackContext):
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
             text = "ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ɢᴇᴛ ᴛʜɪs ᴄʜᴀᴛ's sᴇᴛᴛɪɴɢs ᴀs ᴡᴇʟʟ ᴀs ʏᴏᴜʀs"
-            msg.reply_photo(START_IMG,text,
+            msg.reply_photo(
+                START_IMG,
+                text,
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -1035,7 +1165,6 @@ def donate(update: Update, context: CallbackContext):
                 f"» ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴩᴇʀ ᴏғ {dispatcher.bot.first_name} sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ɪs [ɢɪᴛʜᴜʙ](https://github.com/Noob-savvy)"
                 f"\n\nʙᴜᴛ ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ᴛᴏ ᴛʜᴇ ᴩᴇʀsᴏɴ ᴄᴜʀʀᴇɴᴛʟʏ ʀᴜɴɴɪɴɢ ᴍᴇ : [ʜᴇʀᴇ]({DONATE_STRING})",
                 parse_mode=ParseMode.MARKDOWN,
-                
             )
 
     else:
@@ -1044,7 +1173,6 @@ def donate(update: Update, context: CallbackContext):
                 user.id,
                 DONATE_STRING,
                 parse_mode=ParseMode.MARKDOWN,
-                
             )
 
             update.effective_message.reply_text(
@@ -1077,16 +1205,16 @@ def migrate_chats(update: Update, context: CallbackContext):
 
 def main():
     global x
-    x=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="➕ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ➕",
-                            url="https://t.me/{BOT_USERNAME}?startgroup=true"
-                            )
-                       ]
-                ]
-                     )
+    x = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    text="➕ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ➕",
+                    url="https://t.me/{BOT_USERNAME}?startgroup=true",
+                )
+            ]
+        ]
+    )
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
             dispatcher.bot.send_photo(
@@ -1101,7 +1229,8 @@ def main():
    **ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ:** `{tlhver}`
    **ᴩʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ:** `{pyrover}`
  ◦•●◉✿❀ ━━━━━━✯✯✯━━━━━━━ ❀✿◉●•◦
-""",reply_markup=x,
+""",
+                reply_markup=x,
                 parse_mode=ParseMode.MARKDOWN,
             )
         except Unauthorized:
@@ -1129,10 +1258,11 @@ def main():
         Source_about_callback, pattern=r"source_", run_async=True
     )
     music_callback_handler = CallbackQueryHandler(
-        Music_about_callback, pattern=r"Music_",run_async=True
+        Music_about_callback, pattern=r"Music_", run_async=True
     )
     savvyrobot_main_handler = CallbackQueryHandler(
-        SavvyRobot_Main_Callback, pattern=r".*_help",run_async=True)
+        SavvyRobot_Main_Callback, pattern=r".*_help", run_async=True
+    )
     donate_handler = CommandHandler("donate", donate)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
     dispatcher.add_handler(start_handler)

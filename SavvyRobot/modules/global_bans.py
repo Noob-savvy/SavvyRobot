@@ -5,12 +5,7 @@ from io import BytesIO
 
 from telegram import ParseMode, Update
 from telegram.error import BadRequest, TelegramError, Unauthorized
-from telegram.ext import (
-    CallbackContext,
-    CommandHandler,
-    Filters,
-    MessageHandler,
-)
+from telegram.ext import CallbackContext, CommandHandler, Filters, MessageHandler
 from telegram.utils.helpers import mention_html
 
 import SavvyRobot.modules.sql.global_bans_sql as sql
@@ -67,6 +62,7 @@ UNGBAN_ERRORS = {
     "Peer_id_invalid",
     "User not found",
 }
+
 
 @support_plus
 def gban(update: Update, context: CallbackContext):
@@ -267,7 +263,6 @@ def gban(update: Update, context: CallbackContext):
         )
     except:
         pass  # bot probably blocked by user
-
 
 
 @support_plus

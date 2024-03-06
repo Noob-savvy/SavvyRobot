@@ -22,18 +22,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
+
+import requests
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import Message
+
 from SavvyRobot import BOT_NAME, BOT_USERNAME
 from SavvyRobot import pbot as mukesh
-import requests
+
+
 @mukesh.on_message(filters.command("write"))
 async def handwrite(_, message: Message):
     if message.reply_to_message:
         text = message.reply_to_message.text
     else:
-        text =message.text.split(None, 1)[1]
-    m =await message.reply_text( "`Please wait...,\n\nWriting your text...`")
+        text = message.text.split(None, 1)[1]
+    m = await message.reply_text("`Please wait...,\n\nWriting your text...`")
     write = requests.get(f"https://apis.xditya.me/write?text={text}").url
 
     caption = f"""
@@ -42,7 +46,8 @@ sᴜᴄᴇssғᴜʟʟʏ ᴡʀɪᴛᴛᴇɴ ᴛᴇxᴛ 💘
 🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {message.from_user.mention}
 """
     await m.delete()
-    await message.reply_photo(photo=write,caption=caption)
+    await message.reply_photo(photo=write, caption=caption)
+
 
 __mod_name__ = "WʀɪᴛᴇTᴏᴏʟ"
 

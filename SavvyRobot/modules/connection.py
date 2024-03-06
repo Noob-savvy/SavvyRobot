@@ -3,7 +3,7 @@ import time
 
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
-from telegram.error import BadRequest, Forbidden
+from telegram.error import BadRequest
 from telegram.ext import CallbackQueryHandler, CommandHandler
 
 import SavvyRobot.modules.sql.connection_sql as sql

@@ -7,6 +7,7 @@ from pyrate_limiter import (
 )
 from telegram import Update
 from telegram.ext import CommandHandler, MessageHandler, filters
+
 import SavvyRobot.modules.sql.blacklistusers_sql as sql
 from SavvyRobot import ALLOW_EXCL, DEMONS, DEV_USERS, DRAGONS, TIGERS, WOLVES
 
@@ -106,9 +107,7 @@ class CustomCommandHandler(CommandHandler):
             self.collect_additional_context(context, update, dispatcher, check_result)
             return self.callback(update, context)
         else:
-            optional_args = self.collect_optional_args(
-                dispatcher, update, check_result
-            )
+            optional_args = self.collect_optional_args(dispatcher, update, check_result)
             return self.callback(dispatcher.bot, update, **optional_args)
 
     def collect_additional_context(self, context, update, dispatcher, check_result):
@@ -118,6 +117,7 @@ class CustomCommandHandler(CommandHandler):
             context.args = check_result[0]
             if isinstance(check_result[1], dict):
                 context.update(check_result[1])
+
 
 class CustomRegexHandler(MessageHandler):
     def __init__(self, pattern, callback, friendly="", **kwargs):

@@ -5,9 +5,10 @@ import random
 
 import requests
 from PIL import Image, ImageDraw, ImageFont
-from SavvyRobot.modules.nightmode import button_row
-from SavvyRobot import BOT_USERNAME, OWNER_ID,BOT_NAME, SUPPORT_CHAT, telethn
+
+from SavvyRobot import BOT_NAME, BOT_USERNAME, OWNER_ID, SUPPORT_CHAT, telethn
 from SavvyRobot.events import register
+from SavvyRobot.modules.nightmode import button_row
 
 LOGO_LINKS = [
     "https://telegra.ph/file/d1838efdafce9fe611d0c.jpg",
@@ -489,7 +490,7 @@ async def lego(event):
         fnt = glob.glob("./MukeshRobot/resources/fonts/*")
         randf = random.choice(fnt)
         font = ImageFont.truetype(randf, 120)
-        bbox= draw.textbbox((0,0),text, font=font)
+        bbox = draw.textbbox((0, 0), text, font=font)
         w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
         h += int(h * 0.21)
         draw.text(
@@ -525,8 +526,9 @@ async def lego(event):
 ☘️ ʟᴏɢᴏ ᴄʀᴇᴀᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ☘️
 ◈──────────────◈
 🔥 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : @{BOT_USERNAME}
-━━━━━━━{BOT_NAME}━━━━━━━""",buttons=button_row
-)
+━━━━━━━{BOT_NAME}━━━━━━━""",
+            buttons=button_row,
+        )
         await pesan.delete()
         if os.path.exists(fname):
             os.remove(fname)

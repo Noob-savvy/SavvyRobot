@@ -22,7 +22,6 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import escape_markdown, mention_html, mention_markdown
 
-import SavvyRobot
 import SavvyRobot.modules.sql.welcome_sql as sql
 from SavvyRobot import (
     DEMONS,
@@ -965,7 +964,6 @@ def user_button(update: Update, context: CallbackContext):
 
     else:
         query.answer(text="You're not allowed to do this!")
-
 
 
 WELC_HELP_TXT = (

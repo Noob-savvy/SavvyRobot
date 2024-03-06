@@ -39,8 +39,6 @@ from SavvyRobot.modules.helper_funcs.extraction import (
 )
 from SavvyRobot.modules.helper_funcs.string_handling import markdown_parser
 
-
-
 FBAN_ERRORS = {
     "ᴜsᴇʀ ɪs ᴀɴ ᴀᴅᴍɪɴɪsᴛʀᴀᴛᴏʀ ᴏғ ᴛʜᴇ ᴄʜᴀᴛ",
     "ᴄʜᴀᴛ ɴᴏᴛ ғᴏᴜɴᴅ",
@@ -647,7 +645,6 @@ def fed_ban(update: Update, context: CallbackContext):
 
     if fban:
         fed_name = info["fname"]
-        
 
         temp = sql.un_fban_user(fed_id, fban_user_id)
         if not temp:
@@ -807,7 +804,6 @@ def fed_ban(update: Update, context: CallbackContext):
 
     fed_name = info["fname"]
 
-    
     x = sql.fban_user(
         fed_id,
         fban_user_id,

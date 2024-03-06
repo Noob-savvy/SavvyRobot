@@ -1,12 +1,11 @@
 from io import BytesIO
 from time import sleep
-from pyrogram import filters
-from pyrogram.types import Message
+
 from telegram import TelegramError, Update
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CallbackContext, CommandHandler, Filters, MessageHandler
-import SavvyRobot.modules.no_sql.users_db as user_db 
-from SavvyRobot import pbot as app
+
+import SavvyRobot.modules.no_sql.users_db as user_db
 from SavvyRobot import DEV_USERS, LOGGER, OWNER_ID, dispatcher
 from SavvyRobot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
 from SavvyRobot.modules.no_sql.users_db import get_all_users

@@ -1,10 +1,8 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from telethon import functions, types
+from telethon import Button, functions, types
 from telethon.tl.types import ChatBannedRights
-from telethon import TelegramClient, events, Button
-from SavvyRobot import (
-    BOT_NAME,
-    BOT_USERNAME)
+
+from SavvyRobot import BOT_NAME, BOT_USERNAME
 from SavvyRobot import telethn as tbot
 from SavvyRobot.events import register
 from SavvyRobot.modules.sql.night_mode_sql import (
@@ -65,8 +63,10 @@ openhehe = ChatBannedRights(
     change_info=False,
 )
 button_row = [
-        [Button.url('Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ', f'https://t.me/{BOT_USERNAME}?startgroup=new')]
-    ]
+    [Button.url("Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ", f"https://t.me/{BOT_USERNAME}?startgroup=new")]
+]
+
+
 @register(pattern="^/nightmode")
 async def close_ws(event):
     if event.is_group:
@@ -83,7 +83,8 @@ async def close_ws(event):
     add_nightmode(str(event.chat_id))
     await event.reply(
         f"​ᴀᴅᴅᴇᴅ ᴄʜᴀᴛ​ ​​: {event.chat.title} \n​ɪᴅ​: {event.chat_id} ᴛᴏ ᴅᴀᴛᴀʙᴀꜱᴇ. \n**ᴛʜɪꜱ ɢʀᴏᴜᴘ ᴡɪʟʟ ʙᴇ ᴄʟᴏꜱᴇᴅ ᴏɴ 12ᴀᴍ(ɪꜱᴛ) ᴀɴᴅ ᴡɪʟʟ ᴏᴘᴇɴᴇᴅ ᴏɴ 06ᴀᴍ(ɪꜱᴛ)**",
-       buttons=button_row )
+        buttons=button_row,
+    )
 
 
 @register(pattern="^/rmnight")
@@ -113,7 +114,9 @@ async def job_close():
         try:
             await tbot.send_message(
                 int(warner.chat_id),
-                f"12:00 ᴀᴍ, ɢʀᴏᴜᴘ ɪꜱ ᴄʟᴏꜱɪɴɢ ᴛɪʟʟ 6 ᴀᴍ.\n ɴɪɢʜᴛ ᴍᴏᴅᴇ ꜱᴛᴀʀᴛᴇᴅ ! \n**ᴘᴏᴡᴇʀᴇᴅ ʙʏ {BOT_NAME}**",buttons=button_row)
+                f"12:00 ᴀᴍ, ɢʀᴏᴜᴘ ɪꜱ ᴄʟᴏꜱɪɴɢ ᴛɪʟʟ 6 ᴀᴍ.\n ɴɪɢʜᴛ ᴍᴏᴅᴇ ꜱᴛᴀʀᴛᴇᴅ ! \n**ᴘᴏᴡᴇʀᴇᴅ ʙʏ {BOT_NAME}**",
+                buttons=button_row,
+            )
             await tbot(
                 functions.messages.EditChatDefaultBannedRightsRequest(
                     peer=int(warner.chat_id), banned_rights=hehes

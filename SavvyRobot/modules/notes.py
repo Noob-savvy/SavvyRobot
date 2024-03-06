@@ -1,13 +1,11 @@
 import ast
 import re
 from io import BytesIO
-from typing import Optional
 
 from telegram import (
     MAX_MESSAGE_LENGTH,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    Message,
     ParseMode,
     Update,
 )
@@ -22,7 +20,7 @@ from telegram.ext import (
 from telegram.utils.helpers import escape_markdown, mention_markdown
 
 import SavvyRobot.modules.sql.notes_sql as sql
-from SavvyRobot import DRAGONS, EVENT_LOGS, EVENT_LOGS, SUPPORT_CHAT, dispatcher
+from SavvyRobot import DRAGONS, EVENT_LOGS, SUPPORT_CHAT, dispatcher
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
 from SavvyRobot.modules.helper_funcs.chat_status import connection_status, user_admin
 from SavvyRobot.modules.helper_funcs.misc import build_keyboard, revert_buttons
@@ -125,10 +123,12 @@ def get(update, context, notename, show_none=True, no_format=False):
                             else [message.from_user.first_name]
                         )
                     ),
-                    username="@" + message.from_user.username
-                    if message.from_user.username
-                    else mention_markdown(
-                        message.from_user.id, message.from_user.first_name
+                    username=(
+                        "@" + message.from_user.username
+                        if message.from_user.username
+                        else mention_markdown(
+                            message.from_user.id, message.from_user.first_name
+                        )
                     ),
                     mention=mention_markdown(
                         message.from_user.id, message.from_user.first_name
@@ -293,7 +293,7 @@ def clearall(update: Update, context: CallbackContext):
     chat = update.effective_chat
     user = update.effective_user
     member = chat.get_member(user.id)
-    if member.status != "creator" :
+    if member.status != "creator":
         update.effective_message.reply_text(
             "Only the chat owner can clear all notes at once."
         )

@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from telegram import __version__ as lver
 from telethon import __version__ as tver
 
-from SavvyRobot import SUPPORT_CHAT, pbot,BOT_USERNAME, OWNER_ID,BOT_NAME,START_IMG
+from SavvyRobot import BOT_NAME, BOT_USERNAME, OWNER_ID, START_IMG, SUPPORT_CHAT, pbot
 
 PHOTO = [
     "https://telegra.ph/file/d2a23fbe48129a7957887.jpg",
@@ -29,7 +29,6 @@ Savvy = [
         ),
     ],
 ]
-
 
 
 @pbot.on_message(filters.command("alive"))

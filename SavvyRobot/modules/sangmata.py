@@ -1,10 +1,11 @@
 # Added By Asad Ali
 
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from SavvyRobot import telethn as tbot
-from SavvyRobot.events import register
-from SavvyRobot import ubot2 as ubot
 from asyncio.exceptions import TimeoutError
+
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+from SavvyRobot import ubot2 as ubot
+from SavvyRobot.events import register
 
 
 @register(pattern="^/sg ?(.*)")
@@ -32,24 +33,22 @@ async def lastname(steal):
                 r = await conv.get_response()
                 response = await conv.get_response()
             except YouBlockedUserError:
-                await steal.reply(
-                    "```Error, report to @Alexa_Help```"
-                )
+                await steal.reply("```Error, report to @Alexa_Help```")
                 return
             if r.text.startswith("Name"):
                 respond = await conv.get_response()
                 await puki.edit(f"`{r.message}`")
                 await ubot.delete_messages(
                     conv.chat_id, [msg.id, r.id, response.id, respond.id]
-                ) 
+                )
                 return
             if response.text.startswith("No records") or r.text.startswith(
                 "No records"
             ):
-                await puki.edit("```I Can't Find This User's Information, This User Has Never Changed His Name Before.```")
-                await ubot.delete_messages(
-                    conv.chat_id, [msg.id, r.id, response.id]
+                await puki.edit(
+                    "```I Can't Find This User's Information, This User Has Never Changed His Name Before.```"
                 )
+                await ubot.delete_messages(conv.chat_id, [msg.id, r.id, response.id])
                 return
             else:
                 respond = await conv.get_response()
@@ -59,6 +58,7 @@ async def lastname(steal):
             )
     except TimeoutError:
         return await puki.edit("`I'm Sick Sorry...`")
+
 
 __help__ = """
  *Sangmata Module...*

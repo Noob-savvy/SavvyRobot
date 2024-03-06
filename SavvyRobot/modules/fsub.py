@@ -35,7 +35,9 @@ async def participant_check(channel, user_id):
         return False
 
 
-@Mukeshbot(pattern="^/(fsub|Fsub|forcesubscribe|Forcesub|forcesub|Forcesubscribe) ?(.*)")
+@Mukeshbot(
+    pattern="^/(fsub|Fsub|forcesubscribe|Forcesub|forcesub|Forcesubscribe) ?(.*)"
+)
 async def fsub(event):
     if event.is_private:
         return
@@ -147,7 +149,7 @@ async def unmute_fsub(event):
 
 __mod_name__ = "ғ-sᴜʙ"
 
-__help__="""
+__help__ = """
 *ғᴏʀᴄᴇ ꜱᴜʙꜱᴄʀɪʙᴇ:*
 
    •➥ *ᴍᴜᴋᴇsʜʀᴏʙᴏᴛ ᴄᴀɴ ᴍᴜᴛᴇ ᴍᴇᴍʙᴇʀꜱ ᴡʜᴏ ᴀʀᴇ ɴᴏᴛ ꜱᴜʙꜱᴄʀɪʙᴇᴅ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴜɴᴛɪʟ ᴛʜᴇʏ ꜱᴜʙꜱᴄʀɪʙᴇ*
@@ -163,4 +165,3 @@ __help__="""
    💡 ɪғ ʏᴏᴜ ᴅɪꜱᴀʙʟᴇ ғꜱᴜʙ, ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ꜱᴇᴛ ᴀɢᴀɪɴ ғᴏʀ ᴡᴏʀᴋɪɴɢ /fsub channel username
  
 """
-

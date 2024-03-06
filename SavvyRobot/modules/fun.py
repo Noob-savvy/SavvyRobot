@@ -7,11 +7,10 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 
 import SavvyRobot.modules.fun_strings as fun_strings
-from SavvyRobot import dispatcher,OWNER_ID
+from SavvyRobot import OWNER_ID, dispatcher
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
 from SavvyRobot.modules.helper_funcs.chat_status import is_user_admin
 from SavvyRobot.modules.helper_funcs.extraction import extract_user
-
 
 
 def runs(update: Update, context: CallbackContext):
@@ -208,7 +207,6 @@ def table(update: Update, context: CallbackContext):
         else update.effective_message.reply_text
     )
     reply_text(random.choice(fun_strings.TABLE))
-
 
 
 __help__ = """

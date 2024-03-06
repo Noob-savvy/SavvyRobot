@@ -1,20 +1,20 @@
 # Raid module by Luke (t.me/itsLuuke)
 import html
-from typing import Optional
 from datetime import timedelta
-from pytimeparse.timeparse import timeparse
+from typing import Optional
 
+from pytimeparse.timeparse import timeparse
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
-from .log_channel import loggable
-from .helper_funcs.anonymous import user_admin, AdminPerms
-from .helper_funcs.chat_status import bot_admin, connection_status, user_admin_no_reply
-from .helper_funcs.decorators import kigcmd, kigcallback, rate_limit
-from .. import log, updater
-
 import SavvyRobot.modules.sql.welcome_sql as sql
+
+from .. import log, updater
+from .helper_funcs.anonymous import AdminPerms, user_admin
+from .helper_funcs.chat_status import bot_admin, connection_status, user_admin_no_reply
+from .helper_funcs.decorators import kigcallback, kigcmd, rate_limit
+from .log_channel import loggable
 
 j = updater.job_queue
 
@@ -54,18 +54,34 @@ def setRaid(update: Update, context: CallbackContext) -> Optional[str]:
     readable_time = get_readable_time(time)
     if len(args) == 0:
         if stat:
-            text = 'Raid mode is currently <code>Enabled</code>\nWould you like to <code>Disable</code> raid?'
-            keyboard = [[
-                InlineKeyboardButton("Disable Raid Mode", callback_data="disable_raid={}={}".format(chat.id, time)),
-                InlineKeyboardButton("Cancel Action", callback_data="cancel_raid=1"),
-            ]]
+            text = "Raid mode is currently <code>Enabled</code>\nWould you like to <code>Disable</code> raid?"
+            keyboard = [
+                [
+                    InlineKeyboardButton(
+                        "Disable Raid Mode",
+                        callback_data="disable_raid={}={}".format(chat.id, time),
+                    ),
+                    InlineKeyboardButton(
+                        "Cancel Action", callback_data="cancel_raid=1"
+                    ),
+                ]
+            ]
         else:
-            text = f"Raid mode is currently <code>Disabled</code>\nWould you like to <code>Enable</code> " \
-                   f"raid for {readable_time}?"
-            keyboard = [[
-                InlineKeyboardButton("Enable Raid Mode", callback_data="enable_raid={}={}".format(chat.id, time)),
-                InlineKeyboardButton("Cancel Action", callback_data="cancel_raid=0"),
-            ]]
+            text = (
+                f"Raid mode is currently <code>Disabled</code>\nWould you like to <code>Enable</code> "
+                f"raid for {readable_time}?"
+            )
+            keyboard = [
+                [
+                    InlineKeyboardButton(
+                        "Enable Raid Mode",
+                        callback_data="enable_raid={}={}".format(chat.id, time),
+                    ),
+                    InlineKeyboardButton(
+                        "Cancel Action", callback_data="cancel_raid=0"
+                    ),
+                ]
+            ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         msg.reply_text(text, parse_mode=ParseMode.HTML, reply_markup=reply_markup)
 
@@ -79,26 +95,44 @@ def setRaid(update: Update, context: CallbackContext) -> Optional[str]:
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#RAID\n"
                 f"Disabled\n"
-                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n")
+                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+            )
 
     else:
         args_time = args[0].lower()
         if time := get_time(args_time):
             readable_time = get_readable_time(time)
             if 300 <= time < 86400:
-                text = f"Raid mode is currently <code>Disabled</code>\nWould you like to <code>Enable</code> " \
-                       f"raid for {readable_time}? "
-                keyboard = [[
-                    InlineKeyboardButton("Enable Raid", callback_data="enable_raid={}={}".format(chat.id, time)),
-                    InlineKeyboardButton("Cancel Action", callback_data="cancel_raid=0"),
-                ]]
+                text = (
+                    f"Raid mode is currently <code>Disabled</code>\nWould you like to <code>Enable</code> "
+                    f"raid for {readable_time}? "
+                )
+                keyboard = [
+                    [
+                        InlineKeyboardButton(
+                            "Enable Raid",
+                            callback_data="enable_raid={}={}".format(chat.id, time),
+                        ),
+                        InlineKeyboardButton(
+                            "Cancel Action", callback_data="cancel_raid=0"
+                        ),
+                    ]
+                ]
                 reply_markup = InlineKeyboardMarkup(keyboard)
-                msg.reply_text(text, parse_mode=ParseMode.HTML, reply_markup=reply_markup)
+                msg.reply_text(
+                    text, parse_mode=ParseMode.HTML, reply_markup=reply_markup
+                )
             else:
-                msg.reply_text("You can only set time between 5 minutes and 1 day", parse_mode=ParseMode.HTML)
+                msg.reply_text(
+                    "You can only set time between 5 minutes and 1 day",
+                    parse_mode=ParseMode.HTML,
+                )
 
         else:
-            msg.reply_text("Unknown time given, give me something like 5m or 1h", parse_mode=ParseMode.HTML)
+            msg.reply_text(
+                "Unknown time given, give me something like 5m or 1h",
+                parse_mode=ParseMode.HTML,
+            )
 
 
 @kigcallback(pattern="enable_raid=")
@@ -115,8 +149,10 @@ def enable_raid_cb(update: Update, ctx: CallbackContext) -> Optional[str]:
     readable_time = get_readable_time(time)
     _, t, acttime = sql.getRaidStatus(chat_id)
     sql.setRaidStatus(chat_id, True, time, acttime)
-    update.effective_message.edit_text(f"Raid mode has been <code>Enabled</code> for {readable_time}.",
-                                       parse_mode=ParseMode.HTML)
+    update.effective_message.edit_text(
+        f"Raid mode has been <code>Enabled</code> for {readable_time}.",
+        parse_mode=ParseMode.HTML,
+    )
     log.info("enabled raid mode in {} for {}".format(chat_id, readable_time))
     try:
         oldRaid = RUNNING_RAIDS.pop(int(chat_id))
@@ -154,7 +190,7 @@ def disable_raid_cb(update: Update, _: CallbackContext) -> Optional[str]:
     sql.setRaidStatus(chat_id, False, time, acttime)
     j.scheduler.remove_job(RUNNING_RAIDS.pop(int(chat_id)))
     update.effective_message.edit_text(
-        'Raid mode has been <code>Disabled</code>, newly joining members will no longer be kicked.',
+        "Raid mode has been <code>Disabled</code>, newly joining members will no longer be kicked.",
         parse_mode=ParseMode.HTML,
     )
     logmsg = (
@@ -175,7 +211,8 @@ def disable_raid_cb(update: Update, _: CallbackContext):
     what = args[0]
     update.effective_message.edit_text(
         f"Action cancelled, Raid mode will stay <code>{'Enabled' if what == 1 else 'Disabled'}</code>.",
-        parse_mode=ParseMode.HTML)
+        parse_mode=ParseMode.HTML,
+    )
 
 
 @kigcmd(command="raidtime")
@@ -193,24 +230,35 @@ def raidtime(update: Update, context: CallbackContext) -> Optional[str]:
         msg.reply_text(
             f"Raid mode is currently set to {get_readable_time(time)}\nWhen toggled, the raid mode will last "
             f"for {get_readable_time(time)} then turn off automatically",
-            parse_mode=ParseMode.HTML)
+            parse_mode=ParseMode.HTML,
+        )
         return
     args_time = args[0].lower()
     if time := get_time(args_time):
         readable_time = get_readable_time(time)
         if 300 <= time < 86400:
-            text = f"Raid mode is currently set to {readable_time}\nWhen toggled, the raid mode will last for " \
-                   f"{readable_time} then turn off automatically"
+            text = (
+                f"Raid mode is currently set to {readable_time}\nWhen toggled, the raid mode will last for "
+                f"{readable_time} then turn off automatically"
+            )
             msg.reply_text(text, parse_mode=ParseMode.HTML)
             sql.setRaidStatus(chat.id, what, time, acttime)
-            return (f"<b>{html.escape(chat.title)}:</b>\n"
-                    f"#RAID\n"
-                    f"Set Raid mode time to {readable_time}\n"
-                    f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n")
+            return (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"#RAID\n"
+                f"Set Raid mode time to {readable_time}\n"
+                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+            )
         else:
-            msg.reply_text("You can only set time between 5 minutes and 1 day", parse_mode=ParseMode.HTML)
+            msg.reply_text(
+                "You can only set time between 5 minutes and 1 day",
+                parse_mode=ParseMode.HTML,
+            )
     else:
-        msg.reply_text("Unknown time given, give me something like 5m or 1h", parse_mode=ParseMode.HTML)
+        msg.reply_text(
+            "Unknown time given, give me something like 5m or 1h",
+            parse_mode=ParseMode.HTML,
+        )
 
 
 @kigcmd(command="raidactiontime", pass_args=True)
@@ -228,24 +276,35 @@ def raidtime(update: Update, context: CallbackContext) -> Optional[str]:
         msg.reply_text(
             f"Raid action time is currently set to {get_readable_time(time)}\nWhen toggled, the members that "
             f"join will be temp banned for {get_readable_time(time)}",
-            parse_mode=ParseMode.HTML)
+            parse_mode=ParseMode.HTML,
+        )
         return
     args_time = args[0].lower()
     if time := get_time(args_time):
         readable_time = get_readable_time(time)
         if 300 <= time < 86400:
-            text = f"Raid action time is currently set to {get_readable_time(time)}\nWhen toggled, the members that" \
-                   f" join will be temp banned for {readable_time}"
+            text = (
+                f"Raid action time is currently set to {get_readable_time(time)}\nWhen toggled, the members that"
+                f" join will be temp banned for {readable_time}"
+            )
             msg.reply_text(text, parse_mode=ParseMode.HTML)
             sql.setRaidStatus(chat.id, what, t, time)
-            return (f"<b>{html.escape(chat.title)}:</b>\n"
-                    f"#RAID\n"
-                    f"Set Raid mode action time to {readable_time}\n"
-                    f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n")
+            return (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"#RAID\n"
+                f"Set Raid mode action time to {readable_time}\n"
+                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+            )
         else:
-            msg.reply_text("You can only set time between 5 minutes and 1 day", parse_mode=ParseMode.HTML)
+            msg.reply_text(
+                "You can only set time between 5 minutes and 1 day",
+                parse_mode=ParseMode.HTML,
+            )
     else:
-        msg.reply_text("Unknown time given, give me something like 5m or 1h", parse_mode=ParseMode.HTML)
+        msg.reply_text(
+            "Unknown time given, give me something like 5m or 1h",
+            parse_mode=ParseMode.HTML,
+        )
 
 
 from .language import gs

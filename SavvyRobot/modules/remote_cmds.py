@@ -2,7 +2,7 @@ from telegram import ChatPermissions, Update
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler
 
-from SavvyRobot import dispatcher,LOGGER
+from SavvyRobot import LOGGER, dispatcher
 from SavvyRobot.modules.helper_funcs.chat_status import (
     bot_admin,
     is_bot_admin,

@@ -10,7 +10,10 @@ from telegram.ext.filters import MessageFilter
 
 from SavvyRobot import LOGGER
 from SavvyRobot import dispatcher as n
-from SavvyRobot.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
+from SavvyRobot.modules.disable import (
+    DisableAbleCommandHandler,
+    DisableAbleMessageHandler,
+)
 
 
 class MukeshTelegramHandler:

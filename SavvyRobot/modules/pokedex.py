@@ -6,19 +6,19 @@
 # Roses are red, Violets are blue, A face like yours, Belongs in a zoo
 
 
-
-
 import aiohttp
 from pyrogram import filters
+
 from SavvyRobot import pgram as asuna
 
-@asuna.on_message(filters.command('pokedex'))
+
+@asuna.on_message(filters.command("pokedex"))
 async def PokeDex(_, message):
     if len(message.command) != 2:
         await message.reply_text("/pokedex Pokemon Name")
         return
     pokemon = message.text.split(None, 1)[1]
-    pokedex = f'https://some-random-api.ml/pokedex?pokemon={pokemon}'
+    pokedex = f"https://some-random-api.ml/pokedex?pokemon={pokemon}"
     async with aiohttp.ClientSession() as session:
         async with session.get(pokedex) as request:
             if request.status == 404:
@@ -26,16 +26,16 @@ async def PokeDex(_, message):
 
             result = await request.json()
             try:
-                pokemon = result['name']
-                pokedex = result['id']
-                type = result['type']
+                pokemon = result["name"]
+                pokedex = result["id"]
+                type = result["type"]
                 poke_img = f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg"
-                abilities = result['abilities']
-                height = result['height']
-                weight = result['weight']
-                gender = result['gender']
-                stats = result['stats']
-                description = result['description']
+                abilities = result["abilities"]
+                height = result["height"]
+                weight = result["weight"]
+                gender = result["gender"]
+                stats = result["stats"]
+                description = result["description"]
                 caption = f"""
 **Pokemon:** `{pokemon}`
 **Pokedex:** `{pokedex}`
@@ -48,5 +48,4 @@ async def PokeDex(_, message):
 **Description:** `{description}`"""
             except Exception as e:
                 print(str(e))
-                pass
     await message.reply_photo(photo=poke_img, caption=caption)

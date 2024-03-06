@@ -1,9 +1,10 @@
-from SavvyRobot import dispatcher
 from telegram import Update
 from telegram.ext import CallbackContext
+
 from SavvyRobot.modules.helper_funcs.decorators import kigcmd
 
-@kigcmd(command='shout')
+
+@kigcmd(command="shout")
 def shout(update: Update, context: CallbackContext):
     args = context.args
     text = " ".join(args)

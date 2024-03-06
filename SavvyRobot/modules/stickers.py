@@ -2,16 +2,12 @@ import math
 import os
 import urllib.request as urllib
 from html import escape
-import textwrap
-from html import escape
 from urllib.parse import quote as urlquote
 
 import cv2
 import ffmpeg
 from bs4 import BeautifulSoup
 from cloudscraper import CloudScraper
-import requests
-from bs4 import BeautifulSoup as bs
 from PIL import Image
 from telegram import (
     InlineKeyboardButton,
@@ -27,6 +23,7 @@ from SavvyRobot import dispatcher
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
+
 
 def convert_gif(input):
     """ғᴜɴᴄᴛɪᴏɴ ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴍᴘ4 ᴛᴏ ᴡᴇʙᴍ(ᴠᴘ9)!(ᴀʙɪsʜɴᴏɪ)"""
@@ -280,14 +277,14 @@ def kang(update, context):
                     emojis=sticker_emoji,
                 )
                 keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -328,11 +325,12 @@ def kang(update, context):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ",
+                                    url=f"t.me/addstickers/{packname}",
                                 )
                             ]
                         ]
-                    )  
+                    )
                     adding_process.edit_text(
                         f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                         f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -348,11 +346,12 @@ def kang(update, context):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ",
+                                    url=f"t.me/addstickers/{packname}",
                                 )
                             ]
                         ]
-                    )  
+                    )
                     msg.reply_text(
                         f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                         f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -391,14 +390,14 @@ def kang(update, context):
                     emojis=sticker_emoji,
                 )
                 keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -425,11 +424,12 @@ def kang(update, context):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ",
+                                    url=f"t.me/addstickers/{packname}",
                                 )
                             ]
                         ]
-                    )  
+                    )
                     adding_process.edit_text(
                         f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                         f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -468,14 +468,14 @@ def kang(update, context):
                     emojis=sticker_emoji,
                 )
                 keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -502,7 +502,8 @@ def kang(update, context):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ",
+                                    url=f"t.me/addstickers/{packname}",
                                 )
                             ]
                         ]
@@ -552,14 +553,14 @@ def kang(update, context):
                 emojis=sticker_emoji,
             )
             keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                        )
+                    ]
+                ]
+            )
             adding_process.edit_text(
                 f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                 f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -592,14 +593,14 @@ def kang(update, context):
                     emojis=sticker_emoji,
                 )
                 keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
@@ -630,17 +631,15 @@ def kang(update, context):
         else:
             packs = f"t.me/addstickers/{packname}"
             keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
-        msg.reply_text(
-            packs_text, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN
-        )
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                        )
+                    ]
+                ]
+            )
+        msg.reply_text(packs_text, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN)
     try:
         if os.path.isfile("kangsticker.png"):
             os.remove("kangsticker.png")
@@ -669,16 +668,9 @@ def makepack_internal(
     name = user.first_name
     name = name[:50]
     keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
-    
-    
+        [[InlineKeyboardButton(text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}")]]
+    )
+
     try:
         extra_version = ""
         if packnum > 0:
@@ -821,7 +813,7 @@ def video(update: Update, context: CallbackContext):
             "Please reply to a gif for me to get it's video."
         )
 
-                             
+
 __help__ = """
  ❍ /sᴛɪᴄᴋᴇʀɪᴅ *:* ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ ᴛᴏ ᴍᴇ ᴛᴏ ᴛᴇʟʟ ʏᴏᴜ ɪᴛs ғɪʟᴇ ɪᴅ.
  ❍ /getsticker *:* ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ ᴛᴏ ᴍᴇ ᴛᴏ ᴜᴘʟᴏᴀᴅ ɪᴛs ʀᴀᴡ ᴘɴɢ ғɪʟᴇ.

@@ -1,7 +1,7 @@
 from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 from pymongo import MongoClient, collection
 
-from SavvyRobot import  MONGO_DB_URI
+from SavvyRobot import MONGO_DB_URI
 
 mongo = MongoCli(MONGO_DB_URI)
 Mukeshdb = mongo.MUK_ROB

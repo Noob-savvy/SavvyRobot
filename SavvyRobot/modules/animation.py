@@ -3,7 +3,7 @@ import time
 from telegram import Update
 from telegram.ext import CallbackContext, run_async
 
-from SavvyRobot import dispatcher,OWNER_ID
+from SavvyRobot import dispatcher
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
 from SavvyRobot.modules.helper_funcs.chat_status import user_admin
 

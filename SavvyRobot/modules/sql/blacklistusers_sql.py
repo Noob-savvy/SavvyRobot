@@ -15,7 +15,6 @@ class BlacklistUsers(BASE):
         self.reason = reason
 
 
-
 BlacklistUsers.__table__.create(bind=SESSION.get_bind(), checkfirst=True)
 
 

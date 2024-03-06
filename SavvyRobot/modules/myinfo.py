@@ -5,7 +5,8 @@ from datetime import datetime
 
 from telethon import custom, events
 
-from SavvyRobot import telethn as bot,BOT_NAME
+from SavvyRobot import BOT_NAME
+from SavvyRobot import telethn as bot
 from SavvyRobot import telethn as tgbot
 from SavvyRobot.events import register
 

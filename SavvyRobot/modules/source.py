@@ -1,13 +1,12 @@
 from platform import python_version as y
 
+from MukeshRobot import OWNER_ID, dispatcher
+from MukeshRobot import pbot as client
 from pyrogram import __version__ as z
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import __version__ as o
 from telethon import __version__ as s
-
-from MukeshRobot import OWNER_ID, dispatcher
-from MukeshRobot import pbot as client
 
 Mukesh = "https://te.legra.ph/file/1a72f3770dcb90ee8b3f7.jpg"
 
@@ -29,9 +28,7 @@ async def repo(client, message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "• ᴏᴡɴᴇʀ ",user_id=OWNER_ID
-                    ),
+                    InlineKeyboardButton("• ᴏᴡɴᴇʀ ", user_id=OWNER_ID),
                     InlineKeyboardButton(
                         "• ʀᴇᴘᴏ •",
                         url="",

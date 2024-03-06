@@ -98,7 +98,7 @@ if is_module_loaded(FILENAME):
                     result
                     + "\n\nFormatting has been disabled due to an unexpected error.",
                 )
-                
+
     @user_admin
     def logging(update: Update, context: CallbackContext):
         bot = context.bot

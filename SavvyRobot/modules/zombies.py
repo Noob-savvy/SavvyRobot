@@ -34,7 +34,7 @@ UNBAN_RIGHTS = ChatBannedRights(
 )
 
 
-OFFICERS = [OWNER_ID] + DEV_USERS + DRAGONS + DEMONS 
+OFFICERS = [OWNER_ID] + DEV_USERS + DRAGONS + DEMONS
 
 # Check if user has admin rights
 

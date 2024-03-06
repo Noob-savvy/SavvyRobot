@@ -6,23 +6,26 @@
 # Roses are red, Violets are blue, A face like yours, Belongs in a zoo
 
 
-
 import sre_constants
 
 import regex
 import telegram
-from SavvyRobot import LOGGER, dispatcher
-from SavvyRobot.modules.disable import DisableAbleMessageHandler
-from SavvyRobot.modules.helper_funcs.regex_helper import (infinite_loop_check)
 from telegram import Update
 from telegram.ext import CallbackContext, Filters, run_async
+
+from SavvyRobot import LOGGER, dispatcher
+from SavvyRobot.modules.disable import DisableAbleMessageHandler
+from SavvyRobot.modules.helper_funcs.regex_helper import infinite_loop_check
 
 DELIMITERS = ("/", ":", "|", "_")
 
 
 def separate_sed(sed_string):
-    if len(sed_string) >= 3 and sed_string[
-            1] in DELIMITERS and sed_string.count(sed_string[1]) >= 2:
+    if (
+        len(sed_string) >= 3
+        and sed_string[1] in DELIMITERS
+        and sed_string.count(sed_string[1]) >= 2
+    ):
         delim = sed_string[1]
         start = counter = 2
         while counter < len(sed_string):
@@ -41,9 +44,12 @@ def separate_sed(sed_string):
             return None
 
         while counter < len(sed_string):
-            if sed_string[counter] == "\\" and counter + 1 < len(
-                    sed_string) and sed_string[counter + 1] == delim:
-                sed_string = sed_string[:counter] + sed_string[counter + 1:]
+            if (
+                sed_string[counter] == "\\"
+                and counter + 1 < len(sed_string)
+                and sed_string[counter + 1] == delim
+            ):
+                sed_string = sed_string[:counter] + sed_string[counter + 1 :]
 
             elif sed_string[counter] == delim:
                 replace_with = sed_string[start:counter]
@@ -74,53 +80,54 @@ def sed(update: Update, context: CallbackContext):
         repl, repl_with, flags = sed_result
         if not repl:
             update.effective_message.reply_to_message.reply_text(
-                "You're trying to replace... "
-                "nothing with something?")
+                "You're trying to replace... " "nothing with something?"
+            )
             return
 
         try:
             try:
-                check = regex.match(
-                    repl, to_fix, flags=regex.IGNORECASE, timeout=5)
+                check = regex.match(repl, to_fix, flags=regex.IGNORECASE, timeout=5)
             except TimeoutError:
                 return
             if check and check.group(0).lower() == to_fix.lower():
                 update.effective_message.reply_to_message.reply_text(
                     "Hey everyone, {} is trying to make "
                     "me say stuff I don't wanna "
-                    "say!".format(update.effective_user.first_name))
+                    "say!".format(update.effective_user.first_name)
+                )
                 return
             if infinite_loop_check(repl):
                 update.effective_message.reply_text(
-                    "I'm afraid I can't run that regex.")
+                    "I'm afraid I can't run that regex."
+                )
                 return
-            if 'i' in flags and 'g' in flags:
+            if "i" in flags and "g" in flags:
                 text = regex.sub(
-                    repl, repl_with, to_fix, flags=regex.I, timeout=3).strip()
-            elif 'i' in flags:
+                    repl, repl_with, to_fix, flags=regex.I, timeout=3
+                ).strip()
+            elif "i" in flags:
                 text = regex.sub(
-                    repl, repl_with, to_fix, count=1, flags=regex.I,
-                    timeout=3).strip()
-            elif 'g' in flags:
+                    repl, repl_with, to_fix, count=1, flags=regex.I, timeout=3
+                ).strip()
+            elif "g" in flags:
                 text = regex.sub(repl, repl_with, to_fix, timeout=3).strip()
             else:
-                text = regex.sub(
-                    repl, repl_with, to_fix, count=1, timeout=3).strip()
+                text = regex.sub(repl, repl_with, to_fix, count=1, timeout=3).strip()
         except TimeoutError:
-            update.effective_message.reply_text('Timeout')
+            update.effective_message.reply_text("Timeout")
             return
         except sre_constants.error:
             LOGGER.warning(update.effective_message.text)
             LOGGER.exception("SRE constant error")
-            update.effective_message.reply_text(
-                "Do you even sed? Apparently not.")
+            update.effective_message.reply_text("Do you even sed? Apparently not.")
             return
 
         # empty string errors -_-
         if len(text) >= telegram.MAX_MESSAGE_LENGTH:
             update.effective_message.reply_text(
                 "The result of the sed command was too long for \
-                                                 telegram!")
+                                                 telegram!"
+            )
         elif text:
             update.effective_message.reply_to_message.reply_text(text)
 
@@ -133,13 +140,14 @@ larger than {}.
 *Reminder:* Sed uses some special characters to make matching easier, such as these: `+*.?\\`
 If you want to use these characters, make sure you escape them!
 *Example:* \\?.
-""".format(telegram.MAX_MESSAGE_LENGTH)
+""".format(
+    telegram.MAX_MESSAGE_LENGTH
+)
 
 __mod_name__ = "🤓 ʀᴇɢᴇxs"
 
 SED_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r's([{}]).*?\1.*'.format("".join(DELIMITERS))),
-    sed,
-    friendly="sed")
+    Filters.regex(r"s([{}]).*?\1.*".format("".join(DELIMITERS))), sed, friendly="sed"
+)
 
 dispatcher.add_handler(SED_HANDLER)

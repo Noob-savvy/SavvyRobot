@@ -22,11 +22,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
-import random, asyncio
 
-from SavvyRobot import pbot
+import random
+
 from pyrogram import filters
 
+from SavvyRobot import pbot
 
 loveShayri = [
     "Meri chahat dekhni hai? \nTo mere dil par apna dil rakhkar dekh\nteri dhadkan naa bhadjaye to meri mohabbat thukra dena...",
@@ -43,11 +44,13 @@ loveShayri = [
 ]
 love = random.choice(loveShayri)
 
-@pbot.on_message(filters.command("loveshayri"))
 
-async def love_shayri(b,m):
+@pbot.on_message(filters.command("loveshayri"))
+async def love_shayri(b, m):
     "dont remove this line \n credit  |n github : noob-mukesh"
     await m.reply_text(love)
-__mod_name__="​​ꜱʜᴀʏʀɪ"
-__help__="""ꜱᴇɴᴅ ʀᴀɴᴅᴏᴍ ꜱʜᴀʏʀɪ
+
+
+__mod_name__ = "​​ꜱʜᴀʏʀɪ"
+__help__ = """ꜱᴇɴᴅ ʀᴀɴᴅᴏᴍ ꜱʜᴀʏʀɪ
 ❍ /loveshayri : ʟᴏᴠᴇ ꜱʜᴀʏʀɪ"""

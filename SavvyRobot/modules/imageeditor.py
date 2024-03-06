@@ -56,6 +56,8 @@ from SavvyRobot.Addons.ImageEditor.edit_5 import (  # pylint:disable=import-erro
 from SavvyRobot.services.pyrogram import pbot as Client
 
 lel = 00000000
+
+
 # pylint:disable=import-error
 @Client.on_message(filters.command(["edit", "editor"]))
 async def photo(client: Client, message: Message):
@@ -96,10 +98,14 @@ async def photo(client: Client, message: Message):
                     [
                         InlineKeyboardButton(text="🌇 SEPIA", callback_data="sepia"),
                         InlineKeyboardButton(text="✏️ PENCIL", callback_data="pencil"),
-                        InlineKeyboardButton(text="🐶 CARTOON", callback_data="cartoon"),
+                        InlineKeyboardButton(
+                            text="🐶 CARTOON", callback_data="cartoon"
+                        ),
                     ],
                     [
-                        InlineKeyboardButton(text="🔄 INVERT", callback_data="inverted"),
+                        InlineKeyboardButton(
+                            text="🔄 INVERT", callback_data="inverted"
+                        ),
                         InlineKeyboardButton(text="🔮 GLITCH", callback_data="glitch"),
                         InlineKeyboardButton(
                             text="✂️ REMOVE BG", callback_data="removebg"
@@ -295,7 +301,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             InlineKeyboardButton(
                                 text="⚫ Black ⚫", callback_data="black"
                             ),
-                            InlineKeyboardButton(text="🔵 Blue 🔵", callback_data="blue"),
+                            InlineKeyboardButton(
+                                text="🔵 Blue 🔵", callback_data="blue"
+                            ),
                         ],
                     ]
                 ),

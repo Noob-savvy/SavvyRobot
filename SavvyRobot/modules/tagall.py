@@ -9,6 +9,7 @@ from SavvyRobot import telethn as client
 
 spam_chats = []
 
+
 @client.on(events.NewMessage(pattern="^@tagall ?(.*)"))
 @client.on(events.NewMessage(pattern="^@all ?(.*)"))
 @client.on(events.NewMessage(pattern="^/tagall ?(.*)"))

@@ -2,7 +2,8 @@ import random
 
 from telethon import Button, events
 
-from .. import telethn as asst, SUPPORT_CHAT as c
+from .. import SUPPORT_CHAT as c
+from .. import telethn as asst
 
 BUTTON = [[Button.url("🍒 ꜱᴜᴘᴘᴏʀᴛ 🍒", f"https://t.me/{c}")]]
 HOT = "https://telegra.ph/file/daad931db960ea40c0fca.gif"

@@ -4,11 +4,12 @@ from telegram import Update
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
-from SavvyRobot.modules.log_channel import loggable
-from SavvyRobot.modules.helper_funcs.decorators import kigcmd, rate_limit
-
 import SavvyRobot.modules.sql.logger_sql as sql
-from ..modules.helper_funcs.anonymous import user_admin as u_admin, AdminPerms
+from SavvyRobot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from SavvyRobot.modules.log_channel import loggable
+
+from ..modules.helper_funcs.anonymous import AdminPerms
+from ..modules.helper_funcs.anonymous import user_admin as u_admin
 
 
 @kigcmd(command="announce", pass_args=True)
@@ -52,9 +53,10 @@ def announcestat(update: Update, context: CallbackContext) -> str:
             "Your current setting is: {}\n"
             "When True, any admin actions in your group will be announced."
             "When False, admin actions in your group will not be announced.".format(
-                sql.does_chat_log(update.effective_chat.id))
+                sql.does_chat_log(update.effective_chat.id)
+            )
         )
-        return ''
+        return ""
 
 
 def __migrate__(old_chat_id, new_chat_id):

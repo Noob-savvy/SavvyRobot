@@ -14,7 +14,7 @@ from telegram import (
 )
 from telegram.ext import CallbackContext, run_async
 
-from SavvyRobot import dispatcher,OWNER_ID
+from SavvyRobot import dispatcher
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
 
 info_btn = "More Information"

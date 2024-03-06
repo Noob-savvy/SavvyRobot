@@ -17,7 +17,7 @@ import SavvyRobot.modules.sql.notes_sql as sql
 
 # from MukeshRobot.modules.rules import get_rules
 import SavvyRobot.modules.sql.rules_sql as rulessql
-from SavvyRobot import EVENT_LOGS,OWNER_ID, SUPPORT_CHAT, dispatcher
+from SavvyRobot import EVENT_LOGS, OWNER_ID, SUPPORT_CHAT, dispatcher
 from SavvyRobot.__main__ import DATA_IMPORT
 from SavvyRobot.modules.connection import connected
 from SavvyRobot.modules.helper_funcs.alternate import typing_action

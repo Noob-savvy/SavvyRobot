@@ -5,7 +5,7 @@ import requests
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
-from SavvyRobot import dispatcher,OWNER_ID
+from SavvyRobot import dispatcher
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
 
 
@@ -51,7 +51,11 @@ def change_quote(update: Update, context: CallbackContext):
 
 def animequotes(update: Update, context: CallbackContext):
     message = update.effective_message
-    message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
+    (
+        message.reply_to_message.from_user.first_name
+        if message.reply_to_message
+        else message.from_user.first_name
+    )
     reply_photo = (
         message.reply_to_message.reply_photo
         if message.reply_to_message

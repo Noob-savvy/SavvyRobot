@@ -32,7 +32,6 @@ async def handler(event):
 
     msg = await event.reply("```Memifying this image! ✊🏻 ```")
 
-
     text = str(event.pattern_match.group(1)).strip()
 
     if len(text) < 1:

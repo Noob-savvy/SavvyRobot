@@ -16,9 +16,11 @@ from telegram.utils.helpers import escape_markdown, mention_html
 from telethon import events
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
-from SavvyRobot.modules.alive import Mukesh
+
 import SavvyRobot.modules.sql.userinfo_sql as sql
 from SavvyRobot import (
+    BOT_NAME,
+    BOT_USERNAME,
     DEMONS,
     DEV_USERS,
     DRAGONS,
@@ -28,13 +30,9 @@ from SavvyRobot import (
     WOLVES,
     dispatcher,
     telethn,
-    BOT_NAME,
-    BOT_USERNAME
 )
-
 from SavvyRobot.__main__ import STATS, TOKEN, USER_INFO
 from SavvyRobot.modules.disable import DisableAbleCommandHandler
-from SavvyRobot.modules.helper_funcs.chat_status import sudo_plus
 from SavvyRobot.modules.helper_funcs.extraction import extract_user
 from SavvyRobot.modules.sql.global_bans_sql import is_user_gbanned
 from SavvyRobot.modules.sql.users_sql import get_user_num_chats
@@ -83,7 +81,6 @@ def hpmanager(user):
         # if no bio exsit ==> -10% of hp
         if not sql.get_user_bio(user.id):
             new_hp -= no_by_per(total_hp, 10)
-
 
         # fbanned users will have (2*number of fbans) less from max HP
         # Example: if HP is 100 but user has 5 diff fbans
@@ -158,7 +155,7 @@ def get_id(update: Update, context: CallbackContext):
 
 @telethn.on(
     events.NewMessage(
-        pattern="/ginfo",from_users=(TIGERS or []) + (DRAGONS or []) + (DEMONS or [])
+        pattern="/ginfo", from_users=(TIGERS or []) + (DRAGONS or []) + (DEMONS or [])
     ),
 )
 async def group_info(event) -> None:
@@ -232,7 +229,9 @@ def info(update: Update, context: CallbackContext):
     else:
         return
 
-    rep = message.reply_text("<code>ᴇxᴛʀᴀᴄᴛɪɴɢ ɪɴғᴏʀᴍᴀᴛɪᴏɴ...</code>", parse_mode=ParseMode.HTML)
+    rep = message.reply_text(
+        "<code>ᴇxᴛʀᴀᴄᴛɪɴɢ ɪɴғᴏʀᴍᴀᴛɪᴏɴ...</code>", parse_mode=ParseMode.HTML
+    )
 
     text = (
         f"ㅤ ㅤㅤ      ✦ ᴜsᴇʀ ɪɴғᴏ ✦\n•❅─────✧❅✦❅✧─────❅•\n"

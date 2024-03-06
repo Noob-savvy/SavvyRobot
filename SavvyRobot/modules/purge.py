@@ -2,7 +2,7 @@ import time
 
 from telethon import events
 
-from SavvyRobot import telethn,pbot
+from SavvyRobot import telethn
 from SavvyRobot.modules.helper_funcs.telethn.chatstatus import (
     can_delete_messages,
     user_is_admin,
@@ -69,6 +69,8 @@ async def delete_messages(event):
     chat = await event.get_input_chat()
     del_message = [message, event.message]
     await event.client.delete_messages(chat, del_message)
+
+
 async def spurge_messages(event):
     if event.from_id is None:
         return
@@ -102,6 +104,7 @@ async def spurge_messages(event):
     except:
         pass
 
+
 __help__ = """
  ❍ /del *:* ᴅᴇʟᴇᴛᴇs ᴛʜᴇ ᴍᴇssᴀɢᴇ ʏᴏᴜ ʀᴇᴘʟɪᴇᴅ ᴛᴏ
  ❍ /purge *:* ᴅᴇʟᴇᴛᴇs ᴀʟʟ ᴍᴇssᴀɢᴇs ʙᴇᴛᴡᴇᴇɴ ᴛʜɪs ᴀɴᴅ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴛᴏ ᴍᴇssᴀɢᴇ.
@@ -117,5 +120,5 @@ telethn.add_event_handler(*PURGE_HANDLER)
 telethn.add_event_handler(*DEL_HANDLER)
 telethn.add_event_handler(*SPURGE_HANDLER)
 __mod_name__ = "Pᴜʀɢᴇ"
-__command_list__ = ["del", "purge","spurge"]
-__handlers__ = [PURGE_HANDLER, DEL_HANDLER,SPURGE_HANDLER]
+__command_list__ = ["del", "purge", "spurge"]
+__handlers__ = [PURGE_HANDLER, DEL_HANDLER, SPURGE_HANDLER]

@@ -3,7 +3,7 @@ import re
 from html import escape
 
 import telegram
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Message, ParseMode
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 from telegram.error import BadRequest
 from telegram.ext import (
     CallbackQueryHandler,
@@ -344,17 +344,21 @@ def reply_filter(update, context):
                                 if message.from_user.last_name
                                 else [escape(message.from_user.first_name)]
                             ),
-                            username="@" + escape(message.from_user.username)
-                            if message.from_user.username
-                            else mention_html(
-                                message.from_user.id, message.from_user.first_name
+                            username=(
+                                "@" + escape(message.from_user.username)
+                                if message.from_user.username
+                                else mention_html(
+                                    message.from_user.id, message.from_user.first_name
+                                )
                             ),
                             mention=mention_html(
                                 message.from_user.id, message.from_user.first_name
                             ),
-                            chatname=escape(message.chat.title)
-                            if message.chat.type != "private"
-                            else escape(message.from_user.first_name),
+                            chatname=(
+                                escape(message.chat.title)
+                                if message.chat.type != "private"
+                                else escape(message.from_user.first_name)
+                            ),
                             id=message.from_user.id,
                         )
                     else:
@@ -405,8 +409,7 @@ def reply_filter(update, context):
                             chat.id,
                             filt.file_id,
                             reply_to_message_id=message.message_id,
-                    
-                            reply_markup=keyboard
+                            reply_markup=keyboard,
                         )
                     except BadRequest:
                         send_message(

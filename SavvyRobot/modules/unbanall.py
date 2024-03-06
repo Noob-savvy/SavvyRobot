@@ -49,7 +49,9 @@ async def _(event):
 
     is_admin = False
     try:
-        mukeshrobot = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+        mukeshrobot = await telethn(
+            GetParticipantRequest(event.chat_id, event.sender_id)
+        )
     except UserNotParticipantError:
         is_admin = False
     else:
@@ -102,7 +104,9 @@ async def _(event):
 
     is_admin = False
     try:
-        mukeshrobot = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+        mukeshrobot = await telethn(
+            GetParticipantRequest(event.chat_id, event.sender_id)
+        )
     except UserNotParticipantError:
         is_admin = False
     else:

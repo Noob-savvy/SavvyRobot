@@ -14,8 +14,10 @@ import requests
 from telethon import types
 from telethon.tl import functions
 
+from SavvyRobot import REM_BG_API_KEY, TEMP_DOWNLOAD_DIRECTORY
+from SavvyRobot import telethn as tbot
 from SavvyRobot.events import register
-from SavvyRobot import TEMP_DOWNLOAD_DIRECTORY, REM_BG_API_KEY, telethn as tbot
+
 
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
@@ -99,7 +101,6 @@ def ReTrieveFile(input_file_name):
         stream=True,
     )
     return r
-
 
 
 __mod_name__ = "⚪ ʀᴇᴍᴏᴠᴇ ʙɢ"
