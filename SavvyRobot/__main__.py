@@ -415,9 +415,7 @@ def Savvy_about_callback(update: Update, context: CallbackContext):
                         ),
                     ],
                     [
-                        InlineKeyboardButton(
-                            text="𑁍 ᴀɪ 𑁍", callback_data="source_"
-                        ),
+                        InlineKeyboardButton(text="𑁍 ᴀɪ 𑁍", callback_data="source_"),
                         InlineKeyboardButton(
                             text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
                         ),
