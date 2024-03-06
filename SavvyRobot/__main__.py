@@ -661,11 +661,8 @@ Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ 
                         ),
                         InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
                     ],
-                
                     [
-                        InlineKeyboardButton(
-                            text="𑁍 ᴀɪ 𑁍", callback_data="ai_help"
-                        ),
+                        InlineKeyboardButton(text="𑁍 ᴀɪ 𑁍", callback_data="ai_help"),
                         InlineKeyboardButton(
                             text="𑁍 ʙᴀᴄᴋ 𑁍", callback_data="Main_help"
                         ),
