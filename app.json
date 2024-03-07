@@ -73,7 +73,7 @@
        "required": true,
        "value": "6688753848"
     },
-    "START_IMG": {
+    "ALIVE_IMG": {
        "description": "Telegraph link of the image which will be shown at start command.",
        "required": true,
        "value": "http://telegra.ph/file/74b30d5ca9e482daf5466.jpg"
