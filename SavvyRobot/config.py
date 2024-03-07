@@ -9,7 +9,7 @@ class Config(object):
     OWNER_ID = 6755880898  # If you dont know, run the bot and do /id in your private chat with it, also an integer
 
     SUPPORT_CHAT = "noob_savvy_chats"  # Your own group for support, do not add the @
-    START_IMG = ""
+    ALIVE_IMG = ""
     EVENT_LOGS = ()  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
     MONGO_DB_URI = ""
     # RECOMMENDED
