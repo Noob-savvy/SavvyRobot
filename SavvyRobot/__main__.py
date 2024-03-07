@@ -385,7 +385,7 @@ def ai_help_callback(update: Update, context: CallbackContext):
         await query.answer()
         await query.message.edit_text(
             "*ᴀʀᴛɪғɪᴄɪᴀʟ ɪɴᴛᴇʟɪɢᴇɴᴄᴇ ғᴜɴᴄᴛɪᴏɴs*:\n\n"
-            "*ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs*:\n\n"
+            "ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs:\n"
             "⌬ /askgpt <ᴡʀɪᴛᴇ ǫᴜᴇʀʏ>: ᴀ ᴄʜᴀᴛʙᴏᴛ ᴜsɪɴɢ ɢᴘᴛ ғᴏʀ ʀᴇsᴘᴏɴᴅɪɴɢ ᴛʜᴇ ᴀsᴋᴇᴅ ǫᴜᴇʀɪᴇs.\n\n"
             "⌬ /palm <ᴡʀɪᴛᴇ ᴘʀᴏᴍᴘᴛ>: ᴘᴇʀғᴏʀᴍs ᴀ ᴘᴀʟᴍ sᴇᴀʀᴄʜ ᴜsɪɴɢ ᴀ ᴄʜᴀᴛʙᴏᴛ.\n\n"
             "⌬ /upscale <ʀᴇᴘʟʏ ᴛᴏ ɪᴍᴀɢᴇ>: ᴜᴘsᴄᴀʟᴇs ʏᴏᴜʀ ɪᴍᴀɢᴇ ǫᴜᴀʟɪᴛʏ",
@@ -403,6 +403,7 @@ def ai_help_callback(update: Update, context: CallbackContext):
                 ],
             ),
         )
+
 
 
  def more_ai_handler_callback(update: Update, context: CallbackContext):
