@@ -382,8 +382,8 @@ def help_button(update, context):
 def ai_help_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "ai_help":
-        await query.answer()
-        await query.message.edit_text(
+         query.answer()
+         query.message.edit_text(
             "*ᴀʀᴛɪғɪᴄɪᴀʟ ɪɴᴛᴇʟɪɢᴇɴᴄᴇ ғᴜɴᴄᴛɪᴏɴs*:\n\n"
             "ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs:\n"
             "⌬ /askgpt <ᴡʀɪᴛᴇ ǫᴜᴇʀʏ>: ᴀ ᴄʜᴀᴛʙᴏᴛ ᴜsɪɴɢ ɢᴘᴛ ғᴏʀ ʀᴇsᴘᴏɴᴅɪɴɢ ᴛʜᴇ ᴀsᴋᴇᴅ ǫᴜᴇʀɪᴇs.\n\n"
@@ -409,8 +409,8 @@ def ai_help_callback(update: Update, context: CallbackContext):
  def more_ai_handler_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "more_ai_handler":
-        await query.answer()
-        await query.message.edit_text(
+         query.answer()
+         query.message.edit_text(
             "*ʜᴇʀᴇ's ᴍᴏʀᴇ ɪᴍᴀɢᴇ ɢᴇɴ ʀᴇʟᴀᴛᴇᴅ ᴛᴏᴏʟs*:\n\n"
             "⌬ ᴄᴏᴍᴍᴀɴᴅ: /meinamix\n"
             "⌬ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ: ɢᴇɴᴇʀᴀᴛᴇs ᴀɴ ɪᴍᴀɢᴇ ᴜsɪɴɢ ᴛʜᴇ ᴍᴇɪɴᴀᴍɪx ᴍᴏᴅᴇʟ.\n\n"
