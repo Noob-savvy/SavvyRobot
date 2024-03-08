@@ -93,14 +93,12 @@ buttons = [
     [
         InlineKeyboardButton(text="𑁍 ʜᴏᴍᴇ 𑁍", callback_data="savvy_back"),
         InlineKeyboardButton(text="𑁍 ᴀʙᴏᴜᴛ 𑁍", callback_data="savvy_"),
-    
         InlineKeyboardButton(text="𑁍 ᴀɪ 𑁍", callback_data="ai_help"),
-     
     ],
     [
         InlineKeyboardButton(
             text="Aᴅᴅ Mᴇ ᴛᴏ Yᴏᴜʀ Gʀᴏᴜᴘ",
-            url=f"https://t.me/{dispatcher.bot.username}?startgroup=true",
+            url=f"https://t.me/{dispatcher.bot.username}?startgroup=true"
         ),
     ],
     [
@@ -382,23 +380,23 @@ def help_button(update, context):
 def ai_help_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "ai_help":
-        await query.answer()
-        await query.message.edit_text(
+        query.answer()
+        query.message.edit_text(
             "*ᴀʀᴛɪғɪᴄɪᴀʟ ɪɴᴛᴇʟɪɢᴇɴᴄᴇ ғᴜɴᴄᴛɪᴏɴs*:\n\n"
-            "ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs:\n"
-            "⌬ /askgpt <ᴡʀɪᴛᴇ ǫᴜᴇʀʏ>: ᴀ ᴄʜᴀᴛʙᴏᴛ ᴜsɪɴɢ ɢᴘᴛ ғᴏʀ ʀᴇsᴘᴏɴᴅɪɴɢ ᴛʜᴇ ᴀsᴋᴇᴅ ǫᴜᴇʀɪᴇs.\n\n"
-            "⌬ /palm <ᴡʀɪᴛᴇ ᴘʀᴏᴍᴘᴛ>: ᴘᴇʀғᴏʀᴍs ᴀ ᴘᴀʟᴍ sᴇᴀʀᴄʜ ᴜsɪɴɢ ᴀ ᴄʜᴀᴛʙᴏᴛ.\n\n"
-            "⌬ /upscale <ʀᴇᴘʟʏ ᴛᴏ ɪᴍᴀɢᴇ>: ᴜᴘsᴄᴀʟᴇs ʏᴏᴜʀ ɪᴍᴀɢᴇ ǫᴜᴀʟɪᴛʏ",
+            "*ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs:*\n"
+            "*⌬ /askgpt <ᴡʀɪᴛᴇ ǫᴜᴇʀʏ>: ᴀ ᴄʜᴀᴛʙᴏᴛ ᴜsɪɴɢ ɢᴘᴛ ғᴏʀ ʀᴇsᴘᴏɴᴅɪɴɢ ᴛʜᴇ ᴀsᴋᴇᴅ ǫᴜᴇʀɪᴇs.*\n\n"
+            "*⌬ /palm <ᴡʀɪᴛᴇ ᴘʀᴏᴍᴘᴛ>: ᴘᴇʀғᴏʀᴍs ᴀ ᴘᴀʟᴍ sᴇᴀʀᴄʜ ᴜsɪɴɢ ᴀ ᴄʜᴀᴛʙᴏᴛ.*\n\n"
+            "*⌬ /upscale <ʀᴇᴘʟʏ ᴛᴏ ɪᴍᴀɢᴇ>: ᴜᴘsᴄᴀʟᴇs ʏᴏᴜʀ ɪᴍᴀɢᴇ ǫᴜᴀʟɪᴛʏ*",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            "ᴍᴏʀᴇ ɪᴍᴀɢᴇ ɢᴇɴ ᴀɪ", callback_data="more_ai_handler"
+                            text="ᴍᴏʀᴇ ɪᴍᴀɢᴇ ɢᴇɴ ᴀɪ", callback_data="more_ai_handler"
                         ),
                     ],
                     [
-                        InlineKeyboardButton("ʜᴏᴍᴇ", callback_data="savvy_back"),
+                        InlineKeyboardButton(text="ʜᴏᴍᴇ", callback_data="savvy_back"),
                     ],
                 ],
             ),
@@ -408,8 +406,8 @@ def ai_help_callback(update: Update, context: CallbackContext):
  def more_ai_handler_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "more_ai_handler":
-        await query.answer()
-        await query.message.edit_text(
+        query.answer()
+        query.message.edit_text(
             "*ʜᴇʀᴇ's ᴍᴏʀᴇ ɪᴍᴀɢᴇ ɢᴇɴ ʀᴇʟᴀᴛᴇᴅ ᴛᴏᴏʟs*:\n\n"
             "⌬ ᴄᴏᴍᴍᴀɴᴅ: /meinamix\n"
             "⌬ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ: ɢᴇɴᴇʀᴀᴛᴇs ᴀɴ ɪᴍᴀɢᴇ ᴜsɪɴɢ ᴛʜᴇ ᴍᴇɪɴᴀᴍɪx ᴍᴏᴅᴇʟ.\n\n"
@@ -429,15 +427,14 @@ def ai_help_callback(update: Update, context: CallbackContext):
             "⌬ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ: ɢᴇɴᴇʀᴀᴛᴇs ᴀɴ ɪᴍᴀɢᴇ ᴜsɪɴɢ ᴛʜᴇ ᴄʀᴇᴀᴛɪᴠᴇ ᴍᴏᴅᴇʟ.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
-                [
+                [ 
                     [
-                        InlineKeyboardButton("ʙᴀᴄᴋ", callback_data="ai_help"),
+                        InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="ai_help"),
                     ],
-               [
-                     InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"), 
-               ], 
-                 ],
-                
+                    [
+                     InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="savvy_support"), 
+                    ], 
+                 ], 
             ),
         )
 
