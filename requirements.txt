@@ -83,11 +83,6 @@ selenium
 zalgo_text 
 cowpy 
 fontTools
-nltk==3.8.1
-emoji
-
-#profanity (Credits to Julia)
-better_profanity
 textblob 
 
 
