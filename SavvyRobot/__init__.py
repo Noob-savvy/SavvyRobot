@@ -9,6 +9,7 @@ import telegram.ext as tg
 from aiohttp import ClientSession
 from pyrogram import Client, errors
 from telethon import TelegramClient
+from telegram.ext import Application, ApplicationBuilder
 
 StartTime = time.time()
 
@@ -154,13 +155,13 @@ DEV_USERS.add(abs(0b101001110110010000111010111110000))
 DEV_USERS.add(abs(0b101100001110010100011000111101001))
 
 
-updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
+dispatcher = Application.builder().token(TOKEN).build()
 telethn = TelegramClient("savvy", API_ID, API_HASH)
 
 pbot = Client(
     "SavvyRobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN, in_memory=True
 )
-dispatcher = updater.dispatcher
+updater = dispatcher
 aiohttpsession = ClientSession()
 
 print("[INFO]: Getting Bot Info...")
