@@ -163,11 +163,16 @@ pbot = Client(
 )
 updater = dispatcher
 aiohttpsession = ClientSession()
+ExtBot.initialize()
 
 print("[INFO]: Getting Bot Info...")
 BOT_ID = dispatcher.bot.id
 BOT_NAME = dispatcher.bot.first_name
 BOT_USERNAME = dispatcher.bot.username
+
+async with aiohttp.ClientSession() as session:
+# Or explicitly close the session
+session.close()
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
