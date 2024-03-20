@@ -402,8 +402,7 @@ def ai_help_callback(update: Update, context: CallbackContext):
             ),
         )
 
-
- def more_ai_handler_callback(update: Update, context: CallbackContext):
+def more_ai_handler_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "more_ai_handler":
         query.answer()
