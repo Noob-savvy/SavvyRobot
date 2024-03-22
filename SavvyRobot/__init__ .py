@@ -6,6 +6,7 @@ import ast
 import base64
 import spamwatch
 
+from config import *
 import telegram.ext as tg
 from aiohttp import ClientSession
 from pyrogram import Client, errors
