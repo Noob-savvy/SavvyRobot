@@ -6,7 +6,7 @@ import ast
 import base64
 import spamwatch
 
-from config import *
+from config.Config import LOAD
 import telegram.ext as tg
 from aiohttp import ClientSession
 from pyrogram import Client, errors
@@ -151,6 +151,7 @@ else:
     except ValueError:
         raise Exception("Your whitelisted users list does not contain valid integers.")
 
+LOAD = []
 
 DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
