@@ -34,7 +34,7 @@ pykeyboard==0.1.5
 pynewtonmath==1.0.1
 pyrate-limiter==2.0.1
 pyrogram==2.0.106
-regex==2023.12.25
+regex==2024.4.28
 requests==2.31.0
 secureme==0.0.4
 search_engine_parser==0.6.8
